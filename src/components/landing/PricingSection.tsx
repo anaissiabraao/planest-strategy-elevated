@@ -74,8 +74,10 @@ export default function PricingSection() {
                 <p>**Consultar os tipos de planos</p>
               </div>
 
-              <Button variant="cta" size="lg" className="rounded-full text-base px-10 h-13 w-full sm:w-auto">
-                Solicite mais informações
+              <Button variant="cta" size="lg" className="rounded-full text-base px-10 h-13 w-full sm:w-auto" asChild>
+                <a href="https://wa.me/5547999507669?text=Olá! Gostaria de solicitar mais informações sobre o Planest." target="_blank" rel="noopener noreferrer">
+                  Solicite mais informações
+                </a>
               </Button>
             </div>
           </motion.div>
