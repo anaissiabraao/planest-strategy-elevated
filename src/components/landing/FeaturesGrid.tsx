@@ -1,5 +1,19 @@
 import { motion } from "framer-motion";
-
+import type { LucideIcon } from "lucide-react";
+import {
+  LayoutGrid,
+  Target,
+  SearchCheck,
+  Zap,
+  Map,
+  BarChart3,
+  Microscope,
+  Rocket,
+  Eye,
+  FileText,
+  ShieldCheck,
+  TrendingUp,
+} from "lucide-react";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number = 0) => ({
@@ -15,7 +29,7 @@ const stagger = {
 
 const features = [
   {
-    icon: "📋",
+    Icon: LayoutGrid,
     title: "Modelo de Negócios (Canvas)",
     items: [
       "Modelo de Negócios (BMC)",
@@ -25,7 +39,7 @@ const features = [
     ],
   },
   {
-    icon: "🎯",
+    Icon: Target,
     title: "Alinhamento",
     items: [
       "Formulário de Kick-off",
@@ -35,7 +49,7 @@ const features = [
     ],
   },
   {
-    icon: "🔍",
+    Icon: SearchCheck,
     title: "Diagnóstico",
     items: [
       "Análise do negócio",
@@ -45,7 +59,7 @@ const features = [
     ],
   },
   {
-    icon: "⚡",
+    Icon: Zap,
     title: "Análise de cenário",
     items: [
       "GUT",
@@ -56,7 +70,7 @@ const features = [
     ],
   },
   {
-    icon: "🗺️",
+    Icon: Map,
     title: "Mapa estratégico",
     items: [
       "Missão, Visão, Valores e Sucesso",
@@ -67,7 +81,7 @@ const features = [
     ],
   },
   {
-    icon: "📊",
+    Icon: BarChart3,
     title: "Indicadores",
     items: [
       "Dashboard & Dashboard simplificado",
@@ -78,7 +92,7 @@ const features = [
     ],
   },
   {
-    icon: "🔬",
+    Icon: Microscope,
     title: "Fato, Causa e Ação (FCA)",
     items: [
       "Dashboard",
@@ -88,7 +102,7 @@ const features = [
     ],
   },
   {
-    icon: "🚀",
+    Icon: Rocket,
     title: "Projetos / Plano de Ações",
     items: [
       "Projetos Ágeis & 5W2H",
@@ -98,7 +112,7 @@ const features = [
     ],
   },
   {
-    icon: "👁️",
+    Icon: Eye,
     title: "Acompanhamento",
     items: [
       "Dashboard de Ações",
@@ -108,7 +122,7 @@ const features = [
     ],
   },
   {
-    icon: "📄",
+    Icon: FileText,
     title: "Relatórios",
     items: [
       "Projetos, Ações, Produtividade",
@@ -117,7 +131,7 @@ const features = [
     ],
   },
   {
-    icon: "🔒",
+    Icon: ShieldCheck,
     title: "Controle de Acesso",
     items: [
       "Painel de configurações",
@@ -128,7 +142,7 @@ const features = [
     ],
   },
   {
-    icon: "📈",
+    Icon: TrendingUp,
     title: "Análise do negócio",
     items: [
       "Distribuição de recursos",
@@ -170,7 +184,9 @@ export default function FeaturesGrid() {
                 custom={i}
                 className="group p-6 rounded-2xl border border-border bg-card hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
               >
-                <div className="text-3xl mb-4">{feature.icon}</div>
+                <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300 cursor-pointer">
+                  <feature.Icon size={24} />
+                </div>
                 <h3 className="font-heading text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
                   {feature.title}
                 </h3>
