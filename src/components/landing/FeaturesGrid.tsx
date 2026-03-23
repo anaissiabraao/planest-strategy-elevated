@@ -184,7 +184,9 @@ export default function FeaturesGrid() {
                 custom={i}
                 className="group p-6 rounded-2xl border border-border bg-card hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
               >
-                <div className="text-3xl mb-4">{feature.icon}</div>
+                <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300 cursor-pointer">
+                  <feature.Icon size={24} />
+                </div>
                 <h3 className="font-heading text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
                   {feature.title}
                 </h3>
