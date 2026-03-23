@@ -1,10 +1,41 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
-};
+const ALLOWED_ORIGINS = [
+  "https://planest-teste.lovable.app",
+  "https://www.planest.com.br",
+  "http://localhost:8080",
+];
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get("origin") || "";
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    "Access-Control-Allow-Origin": allowedOrigin,
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+  };
+}
+
+// Simple in-memory rate limiter (per-instance, resets on cold start)
+const ipRequests = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = 15; // requests per window
+const RATE_WINDOW_MS = 60_000; // 1 minute
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipRequests.get(ip);
+  if (!entry || now > entry.resetAt) {
+    ipRequests.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+  entry.count++;
+  return entry.count > RATE_LIMIT;
+}
+
+const ALLOWED_ROLES = new Set(["user", "assistant"]);
+const MAX_MESSAGES = 20;
+const MAX_CONTENT_LENGTH = 2000;
+const MAX_BODY_SIZE = 50_000; // ~50KB
 
 const SYSTEM_PROMPT = `Você é a IA de atendimento do Planest — um sistema de planejamento estratégico feito para consultores.
 
@@ -28,12 +59,67 @@ Diretrizes:
 - Não invente funcionalidades que não existem`;
 
 serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { messages } = await req.json();
+    // Rate limiting by IP
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (isRateLimited(ip)) {
+      return new Response(
+        JSON.stringify({ error: "Muitas requisições. Aguarde um momento." }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Body size check
+    const contentLength = parseInt(req.headers.get("content-length") || "0", 10);
+    if (contentLength > MAX_BODY_SIZE) {
+      return new Response(
+        JSON.stringify({ error: "Payload muito grande." }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const body = await req.json();
+    const { messages } = body;
+
+    // Validate messages array
+    if (!Array.isArray(messages) || messages.length === 0 || messages.length > MAX_MESSAGES) {
+      return new Response(
+        JSON.stringify({ error: "Formato de mensagens inválido." }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Sanitize and validate each message
+    const sanitizedMessages = [];
+    for (const msg of messages) {
+      if (!msg || typeof msg.content !== "string" || typeof msg.role !== "string") {
+        return new Response(
+          JSON.stringify({ error: "Mensagem com formato inválido." }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      if (!ALLOWED_ROLES.has(msg.role)) {
+        continue; // skip disallowed roles silently
+      }
+      sanitizedMessages.push({
+        role: msg.role,
+        content: msg.content.slice(0, MAX_CONTENT_LENGTH),
+      });
+    }
+
+    if (sanitizedMessages.length === 0) {
+      return new Response(
+        JSON.stringify({ error: "Nenhuma mensagem válida." }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
@@ -47,10 +133,7 @@ serve(async (req) => {
         model: "google/gemini-3-flash-preview",
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
-          ...messages.map((m: { role: string; content: string }) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          ...sanitizedMessages,
         ],
       }),
     });
