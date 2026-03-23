@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, ArrowLeft, CheckCircle2, User, Building2, Target, Wrench, BarChart3, MessageSquare } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import { supabase } from "@/integrations/supabase/client";
+import FormAIHelper from "@/components/FormAIHelper";
 
 interface FormData {
   name: string;
@@ -449,6 +450,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
           </button>
         </div>
       </motion.div>
+      <FormAIHelper currentStep={step} />
     </div>
   );
 }

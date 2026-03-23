@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import dashboardMockup from "@/assets/dashboard-mockup.jpg";
+import dashboardMockup from "@/assets/dashboard-mockup.png";
 import logo from "@/assets/logo.jpg";
 import FeaturesGrid from "@/components/landing/FeaturesGrid";
 import Testimonials from "@/components/landing/Testimonials";
