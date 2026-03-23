@@ -247,7 +247,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
 
               {/* Step 1 - Role */}
               {step === 1 && (
-                <div className="grid gap-3">
+                <div className="grid gap-2 md:gap-3">
                   {ROLE_OPTIONS.map((opt) => (
                     <button
                       key={opt.value}
