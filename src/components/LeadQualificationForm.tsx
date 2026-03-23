@@ -440,7 +440,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
         </div>
 
         {/* Skip link */}
-        <div className="text-center mt-6">
+        <div className="text-center mt-4 md:mt-6">
           <button
             onClick={onComplete}
             className="text-xs underline transition-colors"
