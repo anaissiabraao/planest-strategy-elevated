@@ -327,7 +327,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
 
               {/* Step 4 - Tools & Frequency */}
               {step === 4 && (
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                   <div>
                     <p className="text-sm font-medium mb-3" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
                       O que você usa hoje para planejar?
