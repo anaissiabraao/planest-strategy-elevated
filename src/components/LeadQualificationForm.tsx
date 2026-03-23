@@ -303,7 +303,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
                       <button
                         key={opt.id}
                         onClick={() => togglePain(opt.id)}
-                        className="flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200"
+                        className="flex items-center gap-2.5 md:gap-3 p-3 md:p-3.5 rounded-xl border text-left transition-all duration-200"
                         style={{
                           borderColor: formData.pain_points.includes(opt.id) ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)",
                           background: formData.pain_points.includes(opt.id) ? "hsl(var(--accent) / 0.1)" : "transparent",
