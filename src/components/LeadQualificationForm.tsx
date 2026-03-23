@@ -398,7 +398,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
           </AnimatePresence>
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex items-center justify-between mt-5 md:mt-8">
             {step > 0 ? (
               <button
                 onClick={prev}
