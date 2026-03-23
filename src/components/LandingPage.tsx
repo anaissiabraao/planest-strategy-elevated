@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import dashboardMockup from "@/assets/dashboard-mockup.jpg";
+import FeaturesGrid from "@/components/landing/FeaturesGrid";
+import Testimonials from "@/components/landing/Testimonials";
+import PricingSection from "@/components/landing/PricingSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -299,6 +302,11 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+      {/* FUNCIONALIDADES */}
+      <FeaturesGrid />
+
+      {/* PLANO */}
+      <PricingSection />
 
       {/* DIFERENCIAL */}
       <section className="py-32">
@@ -401,6 +409,8 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+      {/* DEPOIMENTOS */}
+      <Testimonials />
 
       {/* CTA FINAL */}
       <section className="py-32">
@@ -442,9 +452,13 @@ export default function LandingPage() {
           <span className="font-heading text-xl font-bold text-foreground">
             Plan<span className="text-accent">est</span>
           </span>
-          <p className="text-sm text-muted-foreground">
-            © 2026 Planest. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-muted-foreground">
+            <a href="tel:+554799950-7669" className="hover:text-foreground transition-colors">
+              📞 (47) 99950-7669
+            </a>
+            <span className="hidden md:inline">·</span>
+            <p>© 2026 Planest. Todos os direitos reservados.</p>
+          </div>
         </div>
       </footer>
     </div>
