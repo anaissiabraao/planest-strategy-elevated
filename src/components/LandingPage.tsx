@@ -302,6 +302,11 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+      {/* FUNCIONALIDADES */}
+      <FeaturesGrid />
+
+      {/* PLANO */}
+      <PricingSection />
 
       {/* DIFERENCIAL */}
       <section className="py-32">
