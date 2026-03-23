@@ -279,7 +279,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
                     <button
                       key={opt.value}
                       onClick={() => setFormData({ ...formData, company_size: opt.value })}
-                      className="p-4 rounded-xl border text-center transition-all duration-200"
+                      className="p-3 md:p-4 rounded-xl border text-center transition-all duration-200"
                       style={{
                         borderColor: formData.company_size === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)",
                         background: formData.company_size === opt.value ? "hsl(var(--accent) / 0.1)" : "transparent",
