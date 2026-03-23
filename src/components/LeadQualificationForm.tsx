@@ -207,20 +207,20 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
 
               {/* Step 0 - Contact Info */}
               {step === 0 && (
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
+                    <label className="text-xs md:text-sm font-medium mb-1 md:mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
                       Seu nome
                     </label>
                     <Input
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Digite seu nome completo"
-                      className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent"
+                      className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base md:text-sm h-11 md:h-10"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
+                    <label className="text-xs md:text-sm font-medium mb-1 md:mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
                       Seu e-mail
                     </label>
                     <Input
@@ -228,18 +228,18 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="seu@email.com"
-                      className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent"
+                      className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base md:text-sm h-11 md:h-10"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
+                    <label className="text-xs md:text-sm font-medium mb-1 md:mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
                       Telefone <span className="text-white/40">(opcional)</span>
                     </label>
                     <Input
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="(00) 00000-0000"
-                      className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent"
+                      className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base md:text-sm h-11 md:h-10"
                     />
                   </div>
                 </div>
