@@ -159,8 +159,8 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
         </div>
 
         {/* Progress */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between text-xs mb-2" style={{ color: "hsl(var(--dark-bg-foreground) / 0.5)" }}>
+        <div className="mb-4 md:mb-6">
+          <div className="flex items-center justify-between text-[10px] md:text-xs mb-1.5 md:mb-2" style={{ color: "hsl(var(--dark-bg-foreground) / 0.5)" }}>
             <span>Etapa {step + 1} de {totalSteps}</span>
             <span>{Math.round(progress)}%</span>
           </div>
