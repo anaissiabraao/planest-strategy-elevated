@@ -97,11 +97,11 @@ export default function FormAIHelper({ currentStep }: { currentStep: number }) {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 w-80 md:w-96 rounded-2xl shadow-2xl border overflow-hidden flex flex-col"
+            className="fixed bottom-0 left-0 right-0 md:bottom-6 md:right-6 md:left-auto z-50 w-full md:w-96 md:rounded-2xl rounded-t-2xl shadow-2xl border overflow-hidden flex flex-col"
             style={{
               background: "hsl(var(--dark-bg))",
               borderColor: "hsl(var(--dark-bg-foreground) / 0.1)",
-              maxHeight: "450px",
+              maxHeight: "85dvh",
             }}
           >
             {/* Header */}
