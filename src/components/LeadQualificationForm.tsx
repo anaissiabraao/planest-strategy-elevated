@@ -450,6 +450,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
           </button>
         </div>
       </motion.div>
+      <FormAIHelper currentStep={step} />
     </div>
   );
 }
