@@ -385,8 +385,8 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
                     value={formData.biggest_challenge}
                     onChange={(e) => setFormData({ ...formData, biggest_challenge: e.target.value })}
                     placeholder="Ex: Não consigo acompanhar a execução dos planos de ação dos meus clientes..."
-                    rows={4}
-                    className="w-full rounded-xl p-4 text-sm bg-transparent border resize-none focus:outline-none focus:ring-2"
+                    rows={3}
+                    className="w-full rounded-xl p-3 md:p-4 text-base md:text-sm bg-transparent border resize-none focus:outline-none focus:ring-2"
                     style={{
                       borderColor: "hsl(var(--dark-bg-foreground) / 0.1)",
                       color: "hsl(var(--dark-bg-foreground))",
