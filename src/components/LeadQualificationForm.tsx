@@ -252,7 +252,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
                     <button
                       key={opt.value}
                       onClick={() => setFormData({ ...formData, role: opt.value })}
-                      className="flex items-center gap-3 p-4 rounded-xl border text-left transition-all duration-200"
+                      className="flex items-center gap-3 p-3 md:p-4 rounded-xl border text-left transition-all duration-200"
                       style={{
                         borderColor: formData.role === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)",
                         background: formData.role === opt.value ? "hsl(var(--accent) / 0.1)" : "transparent",
