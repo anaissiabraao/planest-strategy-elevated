@@ -29,7 +29,7 @@ const stagger = {
 
 const features = [
   {
-    icon: "📋",
+    Icon: LayoutGrid,
     title: "Modelo de Negócios (Canvas)",
     items: [
       "Modelo de Negócios (BMC)",
@@ -39,7 +39,7 @@ const features = [
     ],
   },
   {
-    icon: "🎯",
+    Icon: Target,
     title: "Alinhamento",
     items: [
       "Formulário de Kick-off",
@@ -49,7 +49,7 @@ const features = [
     ],
   },
   {
-    icon: "🔍",
+    Icon: SearchCheck,
     title: "Diagnóstico",
     items: [
       "Análise do negócio",
@@ -59,7 +59,7 @@ const features = [
     ],
   },
   {
-    icon: "⚡",
+    Icon: Zap,
     title: "Análise de cenário",
     items: [
       "GUT",
@@ -70,7 +70,7 @@ const features = [
     ],
   },
   {
-    icon: "🗺️",
+    Icon: Map,
     title: "Mapa estratégico",
     items: [
       "Missão, Visão, Valores e Sucesso",
@@ -81,7 +81,7 @@ const features = [
     ],
   },
   {
-    icon: "📊",
+    Icon: BarChart3,
     title: "Indicadores",
     items: [
       "Dashboard & Dashboard simplificado",
@@ -92,7 +92,7 @@ const features = [
     ],
   },
   {
-    icon: "🔬",
+    Icon: Microscope,
     title: "Fato, Causa e Ação (FCA)",
     items: [
       "Dashboard",
@@ -102,7 +102,7 @@ const features = [
     ],
   },
   {
-    icon: "🚀",
+    Icon: Rocket,
     title: "Projetos / Plano de Ações",
     items: [
       "Projetos Ágeis & 5W2H",
@@ -112,7 +112,7 @@ const features = [
     ],
   },
   {
-    icon: "👁️",
+    Icon: Eye,
     title: "Acompanhamento",
     items: [
       "Dashboard de Ações",
@@ -122,7 +122,7 @@ const features = [
     ],
   },
   {
-    icon: "📄",
+    Icon: FileText,
     title: "Relatórios",
     items: [
       "Projetos, Ações, Produtividade",
@@ -131,7 +131,7 @@ const features = [
     ],
   },
   {
-    icon: "🔒",
+    Icon: ShieldCheck,
     title: "Controle de Acesso",
     items: [
       "Painel de configurações",
@@ -142,7 +142,7 @@ const features = [
     ],
   },
   {
-    icon: "📈",
+    Icon: TrendingUp,
     title: "Análise do negócio",
     items: [
       "Distribuição de recursos",
