@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import dashboardMockup from "@/assets/dashboard-mockup.jpg";
+import FeaturesGrid from "@/components/landing/FeaturesGrid";
+import Testimonials from "@/components/landing/Testimonials";
+import PricingSection from "@/components/landing/PricingSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
