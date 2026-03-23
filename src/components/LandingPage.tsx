@@ -1,9 +1,15 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import dashboardMockup from "@/assets/dashboard-mockup.jpg";
+import logo from "@/assets/logo.jpg";
 import FeaturesGrid from "@/components/landing/FeaturesGrid";
 import Testimonials from "@/components/landing/Testimonials";
 import PricingSection from "@/components/landing/PricingSection";
+import VideoSection from "@/components/landing/VideoSection";
+import WhatsAppButton from "@/components/WhatsAppButton";
+
+const SAAS_URL = "https://www.planest.com.br/saas/";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -24,16 +30,17 @@ export default function LandingPage() {
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="section-padding flex items-center justify-between h-16 max-w-[1400px] mx-auto">
-          <span className="font-heading text-2xl font-bold tracking-tight text-foreground">
-            Plan<span className="text-accent">est</span>
-          </span>
+          <a href="/">
+            <img src={logo} alt="Planest" className="h-10 w-10 rounded-lg object-cover" />
+          </a>
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground font-medium">
             <a href="#solucao" className="hover:text-foreground transition-colors">Solução</a>
             <a href="#produto" className="hover:text-foreground transition-colors">Produto</a>
             <a href="#como-funciona" className="hover:text-foreground transition-colors">Como funciona</a>
+            <Link to="/para-quem" className="hover:text-foreground transition-colors">Para quem</Link>
           </div>
-          <Button variant="cta" size="sm" className="rounded-full px-6">
-            Testar gratuitamente
+          <Button variant="cta" size="sm" className="rounded-full px-6" asChild>
+            <a href={SAAS_URL} target="_blank" rel="noopener noreferrer">Acessar o sistema</a>
           </Button>
         </div>
       </nav>
@@ -65,11 +72,11 @@ export default function LandingPage() {
                 clientes em um só lugar.
               </motion.p>
               <motion.div variants={fadeUp} custom={2} className="flex flex-wrap gap-4">
-                <Button variant="cta" size="lg" className="rounded-full text-base px-8 h-13">
-                  Testar gratuitamente
+                <Button variant="cta" size="lg" className="rounded-full text-base px-8 h-13" asChild>
+                  <a href={SAAS_URL} target="_blank" rel="noopener noreferrer">Acessar o sistema</a>
                 </Button>
-                <Button variant="cta-outline" size="lg" className="rounded-full text-base px-8 h-13">
-                  Ver como funciona
+                <Button variant="cta-outline" size="lg" className="rounded-full text-base px-8 h-13" asChild>
+                  <a href="#video">Ver como funciona</a>
                 </Button>
               </motion.div>
             </motion.div>
@@ -210,7 +217,6 @@ export default function LandingPage() {
                 loading="lazy"
                 className="w-full h-auto"
               />
-              {/* Highlights */}
               <div className="absolute inset-0 hidden lg:block">
                 {[
                   { label: "Planejamento estruturado", top: "18%", left: "22%" },
@@ -259,7 +265,6 @@ export default function LandingPage() {
             </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8 relative">
-              {/* Connector line */}
               <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-px bg-border" />
 
               {[
@@ -302,6 +307,10 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* VIDEO */}
+      <VideoSection />
+
       {/* FUNCIONALIDADES */}
       <FeaturesGrid />
 
@@ -409,6 +418,7 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+
       {/* DEPOIMENTOS */}
       <Testimonials />
 
@@ -438,8 +448,8 @@ export default function LandingPage() {
               Sem planilhas. Sem complexidade.
             </motion.p>
             <motion.div variants={fadeUp} custom={2}>
-              <Button variant="cta" size="lg" className="rounded-full text-lg px-10 h-14">
-                Começar agora
+              <Button variant="cta" size="lg" className="rounded-full text-lg px-10 h-14" asChild>
+                <a href={SAAS_URL} target="_blank" rel="noopener noreferrer">Começar agora</a>
               </Button>
             </motion.div>
           </motion.div>
@@ -449,18 +459,23 @@ export default function LandingPage() {
       {/* FOOTER */}
       <footer className="py-12 border-t border-border">
         <div className="section-padding max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="font-heading text-xl font-bold text-foreground">
-            Plan<span className="text-accent">est</span>
-          </span>
+          <img src={logo} alt="Planest" className="h-10 w-10 rounded-lg object-cover" />
           <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-muted-foreground">
-            <a href="tel:+554799950-7669" className="hover:text-foreground transition-colors">
-              📞 (47) 99950-7669
+            <a href="tel:+5547999507669" className="hover:text-foreground transition-colors">
+              (47) 99950-7669
             </a>
+            <span className="hidden md:inline">·</span>
+            <Link to="/privacidade" className="hover:text-foreground transition-colors">
+              Política de Privacidade
+            </Link>
             <span className="hidden md:inline">·</span>
             <p>© 2026 Planest. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
+
+      {/* WhatsApp floating button */}
+      <WhatsAppButton />
     </div>
   );
 }
