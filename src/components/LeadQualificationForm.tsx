@@ -191,11 +191,11 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               {/* Step Icon */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "hsl(var(--accent) / 0.15)" }}>
-                  <StepIcon className="w-5 h-5" style={{ color: "hsl(var(--accent))" }} />
+              <div className="flex items-center gap-2.5 md:gap-3 mb-4 md:mb-6">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center" style={{ background: "hsl(var(--accent) / 0.15)" }}>
+                  <StepIcon className="w-4 h-4 md:w-5 md:h-5" style={{ color: "hsl(var(--accent))" }} />
                 </div>
-                <h2 className="text-lg font-semibold" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
+                <h2 className="text-base md:text-lg font-semibold" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
                   {step === 0 && "Vamos nos conhecer"}
                   {step === 1 && "Qual é o seu perfil?"}
                   {step === 2 && "Tamanho da sua equipe"}
