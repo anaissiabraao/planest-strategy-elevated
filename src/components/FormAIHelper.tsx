@@ -78,13 +78,13 @@ export default function FormAIHelper({ currentStep }: { currentStep: number }) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setOpen(true)}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg text-sm font-medium transition-all hover:scale-105"
+            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 px-3 md:px-4 py-2.5 md:py-3 rounded-full shadow-lg text-xs md:text-sm font-medium transition-all hover:scale-105"
             style={{
               background: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))",
               color: "white",
             }}
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
             Precisa de ajuda?
           </motion.button>
         )}
