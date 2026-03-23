@@ -359,7 +359,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
                         <button
                           key={opt.value}
                           onClick={() => setFormData({ ...formData, strategic_planning_frequency: opt.value })}
-                          className="flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200"
+                          className="flex items-center gap-2.5 md:gap-3 p-3 md:p-3.5 rounded-xl border text-left transition-all duration-200"
                           style={{
                             borderColor: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)",
                             background: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent) / 0.1)" : "transparent",
