@@ -274,7 +274,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
 
               {/* Step 2 - Company Size */}
               {step === 2 && (
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 md:gap-3">
                   {SIZE_OPTIONS.map((opt) => (
                     <button
                       key={opt.value}
