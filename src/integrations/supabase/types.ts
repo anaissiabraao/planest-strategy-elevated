@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      lead_responses: {
+        Row: {
+          biggest_challenge: string | null
+          company_size: string | null
+          created_at: string
+          current_tools: string | null
+          email: string | null
+          id: string
+          name: string | null
+          pain_points: string[] | null
+          phone: string | null
+          role: string | null
+          strategic_planning_frequency: string | null
+        }
+        Insert: {
+          biggest_challenge?: string | null
+          company_size?: string | null
+          created_at?: string
+          current_tools?: string | null
+          email?: string | null
+          id?: string
+          name?: string | null
+          pain_points?: string[] | null
+          phone?: string | null
+          role?: string | null
+          strategic_planning_frequency?: string | null
+        }
+        Update: {
+          biggest_challenge?: string | null
+          company_size?: string | null
+          created_at?: string
+          current_tools?: string | null
+          email?: string | null
+          id?: string
+          name?: string | null
+          pain_points?: string[] | null
+          phone?: string | null
+          role?: string | null
+          strategic_planning_frequency?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
