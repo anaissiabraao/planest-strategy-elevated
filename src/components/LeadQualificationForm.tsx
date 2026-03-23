@@ -136,24 +136,24 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
   const StepIcon = stepIcons[step];
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "hsl(var(--dark-bg))" }}>
+    <div className="min-h-[100dvh] flex items-center justify-center px-4 py-6 md:py-0" style={{ background: "hsl(var(--dark-bg))" }}>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(var(--accent)), transparent)" }} />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full opacity-8" style={{ background: "radial-gradient(circle, hsl(var(--primary)), transparent)" }} />
+        <div className="absolute top-1/4 -left-32 w-64 md:w-96 h-64 md:h-96 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(var(--accent)), transparent)" }} />
+        <div className="absolute bottom-1/4 -right-32 w-64 md:w-96 h-64 md:h-96 rounded-full opacity-8" style={{ background: "radial-gradient(circle, hsl(var(--primary)), transparent)" }} />
       </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-xl mx-4"
+        className="relative z-10 w-full max-w-xl"
       >
         {/* Header */}
-        <div className="text-center mb-8">
-          <img src={logo} alt="Planest" className="h-14 w-14 rounded-xl mx-auto mb-4 shadow-lg" />
-          <h1 className="text-2xl md:text-3xl font-bold" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
+        <div className="text-center mb-4 md:mb-8">
+          <img src={logo} alt="Planest" className="h-10 w-10 md:h-14 md:w-14 rounded-xl mx-auto mb-3 md:mb-4 shadow-lg" />
+          <h1 className="text-xl md:text-3xl font-bold leading-tight" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
             Descubra como o Planest pode te ajudar
           </h1>
-          <p className="mt-2 text-sm" style={{ color: "hsl(var(--dark-bg-foreground) / 0.6)" }}>
+          <p className="mt-1.5 md:mt-2 text-xs md:text-sm" style={{ color: "hsl(var(--dark-bg-foreground) / 0.6)" }}>
             Responda algumas perguntas rápidas para personalizarmos sua experiência.
           </p>
         </div>
