@@ -1,5 +1,19 @@
 import { motion } from "framer-motion";
-
+import type { LucideIcon } from "lucide-react";
+import {
+  LayoutGrid,
+  Target,
+  SearchCheck,
+  Zap,
+  Map,
+  BarChart3,
+  Microscope,
+  Rocket,
+  Eye,
+  FileText,
+  ShieldCheck,
+  TrendingUp,
+} from "lucide-react";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number = 0) => ({
