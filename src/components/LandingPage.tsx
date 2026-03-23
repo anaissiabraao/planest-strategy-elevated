@@ -409,6 +409,8 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+      {/* DEPOIMENTOS */}
+      <Testimonials />
 
       {/* CTA FINAL */}
       <section className="py-32">
