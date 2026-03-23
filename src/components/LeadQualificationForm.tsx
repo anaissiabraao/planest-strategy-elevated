@@ -175,7 +175,7 @@ export default function LeadQualificationForm({ onComplete }: { onComplete: () =
         </div>
 
         {/* Card */}
-        <div className="rounded-2xl p-8 md:p-10 border" style={{
+        <div className="rounded-2xl p-5 md:p-10 border" style={{
           background: "hsl(var(--dark-bg-foreground) / 0.03)",
           borderColor: "hsl(var(--dark-bg-foreground) / 0.08)",
           backdropFilter: "blur(20px)",
