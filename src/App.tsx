@@ -8,6 +8,7 @@ import Privacidade from "./pages/Privacidade.tsx";
 import ParaQuem from "./pages/ParaQuem.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import AIChatWidget from "./components/AIChatWidget.tsx";
+import CookieConsent from "./components/CookieConsent.tsx";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AIChatWidget />
+        <CookieConsent />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
