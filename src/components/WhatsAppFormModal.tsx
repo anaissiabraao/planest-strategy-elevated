@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +6,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ArrowRight, ArrowLeft, CheckCircle2, User, Building2, Target, Wrench, BarChart3, MessageSquare, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import FormAIHelper from "@/components/FormAIHelper";
+import { setFormCompleted, hasCompletedForm, setUserSessionData, getUserSessionData, getConsent } from "@/lib/cookies";
 
 const WHATSAPP_NUMBER = "5547999507669";
 
@@ -137,6 +138,23 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
     biggest_challenge: "",
   });
 
+  // Pre-fill from cookies on mount
+  useEffect(() => {
+    if (getConsent()) {
+      const savedName = getUserSessionData("name");
+      const savedEmail = getUserSessionData("email");
+      const savedPhone = getUserSessionData("phone");
+      if (savedName || savedEmail || savedPhone) {
+        setFormData((prev) => ({
+          ...prev,
+          name: savedName || prev.name,
+          email: savedEmail || prev.email,
+          phone: savedPhone || prev.phone,
+        }));
+      }
+    }
+  }, []);
+
   const totalSteps = 6;
   const progress = ((step + 1) / totalSteps) * 100;
 
@@ -179,6 +197,12 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
     const message = buildWhatsAppMessage(formData);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
+
+    // Save session data in cookies
+    setFormCompleted(true);
+    setUserSessionData("name", formData.name);
+    setUserSessionData("email", formData.email);
+    if (formData.phone) setUserSessionData("phone", formData.phone);
 
     setSubmitting(false);
     onOpenChange(false);
