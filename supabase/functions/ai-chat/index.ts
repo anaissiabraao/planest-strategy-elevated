@@ -48,7 +48,7 @@ Informações sobre o Planest:
 - Substitui planilhas por um processo estruturado e escalável
 - Ideal para pequenas/médias empresas e consultores
 - Contato: (47) 99950-7669
-- Site: https://www.planest.com.br/saas/
+- Site: https://saas.planest.com.br/
 
 Diretrizes:
 - Seja amigável, profissional e direto
