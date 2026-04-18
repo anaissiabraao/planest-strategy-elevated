@@ -196,6 +196,9 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
 
     const message = buildWhatsAppMessage(formData);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    if (typeof (window as any).gtag_report_conversion === "function") {
+      (window as any).gtag_report_conversion();
+    }
     window.open(url, "_blank", "noopener,noreferrer");
 
     // Save session data in cookies
@@ -235,6 +238,9 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
 
   function handleSkip() {
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de saber mais sobre o Planest.")}`;
+    if (typeof (window as any).gtag_report_conversion === "function") {
+      (window as any).gtag_report_conversion();
+    }
     window.open(url, "_blank", "noopener,noreferrer");
     onOpenChange(false);
   }
