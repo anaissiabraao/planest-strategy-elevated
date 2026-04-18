@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -8,8 +7,7 @@ import Testimonials from "@/components/landing/Testimonials";
 import PricingSection from "@/components/landing/PricingSection";
 import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
-
-const HeroModel = lazy(() => import("@/components/landing/HeroModel"));
+import HeroModel from "@/components/landing/HeroModel";
 
 const SAAS_URL = "https://www.planest.com.br/saas/";
 
@@ -90,9 +88,7 @@ export default function LandingPage() {
               className="relative"
             >
               <div className="rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[4/3]">
-                <Suspense fallback={<div className="w-full h-full" />}>
-                  <HeroModel className="w-full h-full" />
-                </Suspense>
+                <HeroModel className="w-full h-full" />
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
@@ -207,9 +203,7 @@ export default function LandingPage() {
               custom={1}
               className="relative rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[16/9] max-w-5xl mx-auto"
             >
-              <Suspense fallback={<div className="w-full h-full" />}>
-                <HeroModel className="w-full h-full" />
-              </Suspense>
+              <HeroModel className="w-full h-full" />
               <div className="absolute inset-0 hidden lg:block pointer-events-none">
                 {[
                   { label: "Planejamento estruturado", top: "18%", left: "10%" },
