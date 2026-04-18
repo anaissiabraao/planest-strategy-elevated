@@ -87,7 +87,7 @@ export default function LandingPage() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
-              <div className="rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[4/3]">
+              <div className="rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-square max-h-[320px]">
                 <HeroModel className="w-full h-full" />
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
@@ -198,36 +198,32 @@ export default function LandingPage() {
               </h2>
             </motion.div>
 
-            <motion.div
-              variants={fadeUp}
-              custom={1}
-              className="relative rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[16/9] max-w-5xl mx-auto"
-            >
-              <HeroModel className="w-full h-full" />
-              <div className="absolute inset-0 hidden lg:block pointer-events-none">
+            <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 items-center">
+              <motion.div
+                variants={fadeUp}
+                custom={1}
+                className="relative rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-square max-h-[360px]"
+              >
+                <HeroModel className="w-full h-full" />
+              </motion.div>
+
+              <motion.div variants={fadeUp} custom={2} className="space-y-6">
                 {[
-                  { label: "Planejamento estruturado", top: "18%", left: "10%" },
-                  { label: "Gestão de clientes", top: "18%", left: "72%" },
-                  { label: "Acompanhamento de execução", top: "72%", left: "10%" },
-                  { label: "Centralização de dados", top: "72%", left: "72%" },
+                  { label: "Planejamento estruturado", desc: "Configure o planejamento estratégico do seu cliente em minutos." },
+                  { label: "Gestão de clientes", desc: "Todos os seus clientes organizados em um único painel." },
+                  { label: "Acompanhamento de execução", desc: "Monitore o progresso em tempo real com indicadores visuais." },
+                  { label: "Centralização de dados", desc: "Todas as informações estratégicas em um só lugar." },
                 ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + i * 0.15 }}
-                    className="absolute group"
-                    style={{ top: item.top, left: item.left }}
-                  >
-                    <span className="inline-flex items-center gap-2 bg-foreground/90 text-background text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                      {item.label}
-                    </span>
-                  </motion.div>
+                  <div key={i} className="flex items-start gap-4 group">
+                    <span className="flex-shrink-0 w-2 h-2 rounded-full bg-accent mt-2.5" />
+                    <div>
+                      <h3 className="font-heading text-lg font-bold text-foreground group-hover:text-accent transition-colors">{item.label}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
                 ))}
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
