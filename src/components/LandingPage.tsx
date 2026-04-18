@@ -205,22 +205,17 @@ export default function LandingPage() {
             <motion.div
               variants={fadeUp}
               custom={1}
-              className="relative rounded-2xl overflow-hidden shadow-2xl shadow-foreground/10 border border-border/50"
+              className="relative rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[16/9] max-w-5xl mx-auto"
             >
-              <img
-                src={dashboardMockup}
-                alt="Planest Dashboard"
-                width={1440}
-                height={900}
-                loading="lazy"
-                className="w-full h-auto"
-              />
-              <div className="absolute inset-0 hidden lg:block">
+              <Suspense fallback={<div className="w-full h-full" />}>
+                <HeroModel className="w-full h-full" />
+              </Suspense>
+              <div className="absolute inset-0 hidden lg:block pointer-events-none">
                 {[
-                  { label: "Planejamento estruturado", top: "18%", left: "22%" },
-                  { label: "Gestão de clientes", top: "18%", left: "62%" },
-                  { label: "Acompanhamento de execução", top: "58%", left: "22%" },
-                  { label: "Centralização de dados", top: "58%", left: "62%" },
+                  { label: "Planejamento estruturado", top: "18%", left: "10%" },
+                  { label: "Gestão de clientes", top: "18%", left: "72%" },
+                  { label: "Acompanhamento de execução", top: "72%", left: "10%" },
+                  { label: "Centralização de dados", top: "72%", left: "72%" },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -228,11 +223,11 @@ export default function LandingPage() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 + i * 0.15 }}
-                    className="absolute group cursor-default"
+                    className="absolute group"
                     style={{ top: item.top, left: item.left }}
                   >
-                    <span className="inline-flex items-center gap-2 bg-foreground/90 backdrop-blur-sm text-background text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg group-hover:bg-accent transition-colors duration-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:bg-background" />
+                    <span className="inline-flex items-center gap-2 bg-foreground/90 text-background text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                       {item.label}
                     </span>
                   </motion.div>
