@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import LiteYouTube from "./LiteYouTube";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -39,13 +40,7 @@ export default function VideoSection() {
             className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-border/20"
           >
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/gQhPqfa-gYQ"
-                title="Vídeo explicativo do Planest"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <LiteYouTube videoId="gQhPqfa-gYQ" title="Vídeo explicativo do Planest" />
             </div>
           </motion.div>
         </motion.div>
