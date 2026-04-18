@@ -229,26 +229,26 @@ export default function LandingPage() {
       </section>
 
       {/* COMO FUNCIONA */}
-      <section id="como-funciona" className="py-32 bg-muted/50">
+      <section id="como-funciona" className="py-20 md:py-32 bg-muted/50">
         <div className="section-padding max-w-[1400px] mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="space-y-20"
+            className="space-y-14 md:space-y-20"
           >
             <motion.div variants={fadeUp} custom={0} className="text-center max-w-2xl mx-auto">
-              <p className="text-sm font-semibold tracking-widest uppercase text-accent mb-4">
+              <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-accent mb-4">
                 Simples assim
               </p>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
                 Como funciona
               </h2>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8 relative">
-              <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-px bg-border" />
+            <div className="grid sm:grid-cols-3 gap-10 sm:gap-8 relative">
+              <div className="hidden sm:block absolute top-12 left-[20%] right-[20%] h-px bg-border" />
 
               {[
                 {
@@ -271,17 +271,17 @@ export default function LandingPage() {
                   key={i}
                   variants={fadeUp}
                   custom={i}
-                  className="relative text-center space-y-5"
+                  className="relative text-center space-y-4 sm:space-y-5"
                 >
-                  <div className="w-24 h-24 rounded-2xl bg-background border border-border shadow-sm flex items-center justify-center mx-auto relative z-10">
-                    <span className="font-heading text-3xl font-bold text-accent">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-background border border-border shadow-sm flex items-center justify-center mx-auto relative z-10">
+                    <span className="font-heading text-2xl sm:text-3xl font-bold text-accent">
                       {item.step}
                     </span>
                   </div>
-                  <h3 className="font-heading text-xl font-bold text-foreground">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xs mx-auto">
                     {item.desc}
                   </p>
                 </motion.div>
