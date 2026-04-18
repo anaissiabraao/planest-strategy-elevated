@@ -75,9 +75,31 @@
 
 @layer components {
   .section-padding {
-    @apply px-6 md:px-12 lg:px-20 xl:px-32;
+    @apply px-5 sm:px-6 md:px-12 lg:px-20 xl:px-32;
   }
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important;
   }
 }
