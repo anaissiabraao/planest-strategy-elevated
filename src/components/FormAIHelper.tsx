@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Sparkles, Loader2 } from "lucide-react";
+import { MessageSquare, X, Send, Sparkles, Loader2, HelpCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAutoCollapse } from "@/hooks/useAutoCollapse";
 
@@ -72,13 +72,14 @@ export default function FormAIHelper({ currentStep }: { currentStep: number }) {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button — discreto, abaixo do header do modal */}
       <AnimatePresence>
         {!open && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
             onClick={() => {
               collapseNow();
               setOpen(true);
@@ -86,19 +87,29 @@ export default function FormAIHelper({ currentStep }: { currentStep: number }) {
             onMouseEnter={expand}
             onTouchStart={expand}
             onFocus={expand}
-            className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 rounded-full shadow-lg font-medium transition-all duration-300 hover:scale-105 ${
+            aria-label="Preciso de ajuda"
+            className={`absolute top-3 left-3 sm:top-4 sm:left-4 z-30 flex items-center rounded-full backdrop-blur-md transition-all duration-300 active:scale-95 group ${
               expanded
-                ? "px-3 md:px-4 py-2.5 md:py-3 text-xs md:text-sm opacity-100"
-                : "w-9 h-9 md:w-10 md:h-10 p-0 justify-center opacity-60 hover:opacity-100"
+                ? "gap-1.5 pl-2 pr-3 py-1.5 opacity-100"
+                : "w-8 h-8 sm:w-9 sm:h-9 justify-center opacity-50 hover:opacity-100"
             }`}
             style={{
-              background: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))",
-              color: "white",
+              background: "hsl(var(--dark-bg-foreground) / 0.08)",
+              border: "1px solid hsl(var(--dark-bg-foreground) / 0.12)",
+              color: "hsl(var(--dark-bg-foreground))",
             }}
-            aria-label="Precisa de ajuda?"
           >
-            <Sparkles className={expanded ? "w-3.5 h-3.5 md:w-4 md:h-4" : "w-4 h-4"} />
-            {expanded && <span className="whitespace-nowrap">Precisa de ajuda?</span>}
+            <span
+              className="flex items-center justify-center w-5 h-5 rounded-full flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))" }}
+            >
+              <Sparkles className="w-3 h-3 text-white" />
+            </span>
+            {expanded && (
+              <span className="text-[11px] sm:text-xs font-medium whitespace-nowrap">
+                Ajuda da IA
+              </span>
+            )}
           </motion.button>
         )}
       </AnimatePresence>
