@@ -1,13 +1,15 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import dashboardMockup from "@/assets/dashboard-mockup.png";
 import logo from "@/assets/logo.jpg";
 import FeaturesGrid from "@/components/landing/FeaturesGrid";
 import Testimonials from "@/components/landing/Testimonials";
 import PricingSection from "@/components/landing/PricingSection";
 import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
+
+const HeroModel = lazy(() => import("@/components/landing/HeroModel"));
 
 const SAAS_URL = "https://www.planest.com.br/saas/";
 
@@ -87,17 +89,13 @@ export default function LandingPage() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
-              <div className="rounded-2xl overflow-hidden shadow-2xl shadow-foreground/10 border border-border/50">
-                <img
-                  src={dashboardMockup}
-                  alt="Dashboard do Planest - planejamento estratégico"
-                  width={1440}
-                  height={900}
-                  className="w-full h-auto"
-                />
+              <div className="rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[4/3]">
+                <Suspense fallback={<div className="w-full h-full" />}>
+                  <HeroModel className="w-full h-full" />
+                </Suspense>
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
-              <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
             </motion.div>
           </div>
         </div>
