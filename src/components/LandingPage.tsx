@@ -9,7 +9,7 @@ import PricingSection from "@/components/landing/PricingSection";
 import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const SAAS_URL = "https://saas.planest.com.br/";
+const SAAS_URL = "https://www.planest.com.br/saas/";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
