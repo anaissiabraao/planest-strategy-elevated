@@ -301,30 +301,30 @@ export default function LandingPage() {
       <PricingSection />
 
       {/* DIFERENCIAL */}
-      <section className="py-32">
+      <section className="py-20 md:py-32">
         <div className="section-padding max-w-[1400px] mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="grid lg:grid-cols-[1.2fr_1fr] gap-20 items-center"
+            className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-20 items-center"
           >
-            <motion.div variants={fadeUp} custom={0} className="space-y-8">
-              <h2 className="font-heading text-4xl md:text-5xl font-bold leading-tight text-foreground">
+            <motion.div variants={fadeUp} custom={0} className="space-y-6 md:space-y-8">
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-foreground">
                 Não é mais uma ferramenta.
                 <br />
                 <span className="text-accent">
                   É um sistema de gestão estratégica.
                 </span>
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-lg">
                 O Planest foi construído desde o dia um para consultores que
                 precisam de estrutura, agilidade e resultados reais.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeUp} custom={1} className="space-y-6">
+            <motion.div variants={fadeUp} custom={1} className="space-y-5 md:space-y-6">
               {[
                 {
                   title: "Feito para consultores",
@@ -343,12 +343,12 @@ export default function LandingPage() {
                   key={i}
                   variants={fadeUp}
                   custom={i}
-                  className="p-6 rounded-xl border border-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 group"
+                  className="p-5 sm:p-6 rounded-xl border border-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 group"
                 >
-                  <h3 className="font-heading text-lg font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="font-heading text-base sm:text-lg font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                     {item.desc}
                   </p>
                 </motion.div>
@@ -359,24 +359,24 @@ export default function LandingPage() {
       </section>
 
       {/* TRANSFORMAÇÃO */}
-      <section className="py-32 bg-dark text-dark-foreground">
+      <section className="py-20 md:py-32 bg-dark text-dark-foreground">
         <div className="section-padding max-w-[1400px] mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="text-center space-y-16"
+            className="text-center space-y-12 md:space-y-16"
           >
             <motion.h2
               variants={fadeUp}
               custom={0}
-              className="font-heading text-4xl md:text-5xl font-bold"
+              className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold"
             >
               O que muda na sua consultoria
             </motion.h2>
 
-            <div className="grid md:grid-cols-3 gap-12">
+            <div className="grid sm:grid-cols-3 gap-10 sm:gap-12">
               {[
                 { metric: "Mais", highlight: "organização", desc: "Todos os clientes e projetos em um único lugar estruturado." },
                 { metric: "Mais", highlight: "controle", desc: "Visibilidade total sobre metas, ações e resultados." },
@@ -386,13 +386,13 @@ export default function LandingPage() {
                   key={i}
                   variants={fadeUp}
                   custom={i}
-                  className="space-y-4"
+                  className="space-y-3 sm:space-y-4"
                 >
-                  <p className="font-heading text-5xl md:text-6xl font-bold">
+                  <p className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold">
                     {item.metric}{" "}
                     <span className="text-accent">{item.highlight}</span>
                   </p>
-                  <p className="text-dark-foreground/60 leading-relaxed max-w-xs mx-auto">
+                  <p className="text-sm sm:text-base text-dark-foreground/60 leading-relaxed max-w-xs mx-auto">
                     {item.desc}
                   </p>
                 </motion.div>
@@ -406,19 +406,19 @@ export default function LandingPage() {
       <Testimonials />
 
       {/* CTA FINAL */}
-      <section className="py-32">
+      <section className="py-20 md:py-32">
         <div className="section-padding max-w-[1400px] mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="text-center space-y-8 max-w-3xl mx-auto"
+            className="text-center space-y-6 md:space-y-8 max-w-3xl mx-auto"
           >
             <motion.h2
               variants={fadeUp}
               custom={0}
-              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground"
+              className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground"
             >
               Transforme sua consultoria em um processo{" "}
               <span className="text-accent">escalável</span>
@@ -426,12 +426,12 @@ export default function LandingPage() {
             <motion.p
               variants={fadeUp}
               custom={1}
-              className="text-lg text-muted-foreground"
+              className="text-base sm:text-lg text-muted-foreground"
             >
               Sem planilhas. Sem complexidade.
             </motion.p>
             <motion.div variants={fadeUp} custom={2}>
-              <Button variant="cta" size="lg" className="rounded-full text-lg px-10 h-14" asChild>
+              <Button variant="cta" size="lg" className="rounded-full text-base sm:text-lg px-8 sm:px-10 h-12 sm:h-14 w-full sm:w-auto" asChild>
                 <a href={SAAS_URL} target="_blank" rel="noopener noreferrer">Começar agora</a>
               </Button>
             </motion.div>
@@ -440,10 +440,10 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-12 border-t border-border">
-        <div className="section-padding max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <footer className="py-10 md:py-12 border-t border-border">
+        <div className="section-padding max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <img src={logo} alt="Planest" className="h-10 w-10 rounded-lg object-cover" />
-          <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-xs sm:text-sm text-muted-foreground">
             <a href="tel:+5547999507669" className="hover:text-foreground transition-colors">
               (47) 99950-7669
             </a>
