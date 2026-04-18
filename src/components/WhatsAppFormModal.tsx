@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ArrowRight, ArrowLeft, CheckCircle2, User, Building2, Target, Wrench, BarChart3, MessageSquare, X } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle2, User, Building2, Target, Wrench, BarChart3, MessageSquare, X, Maximize2, Minimize2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import FormAIHelper from "@/components/FormAIHelper";
 import { setFormCompleted, hasCompletedForm, setUserSessionData, getUserSessionData, getConsent } from "@/lib/cookies";
@@ -126,6 +126,7 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [submitting, setSubmitting] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
