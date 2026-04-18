@@ -38,13 +38,16 @@ function Model({ accentHsl }: { accentHsl: string }) {
     return scene;
   }, [gltf.scene, accentHsl]);
 
-  // Adjust camera to frame the object
+  // Adjust camera once to frame the object (avoids zoom drift on resize)
+  const framedRef = useRef(false);
   useEffect(() => {
-    const aspect = size.width / size.height;
+    if (framedRef.current) return;
+    if (!size.width || !size.height) return;
     const fov = (camera as THREE.PerspectiveCamera).fov * (Math.PI / 180);
-    const dist = 2.5 / (2 * Math.tan(fov / 2)) * 1.6;
-    camera.position.set(0, 0.3, Math.max(dist, 3));
+    const dist = (2.5 / (2 * Math.tan(fov / 2))) * 1.8;
+    camera.position.set(0, 0.3, Math.max(dist, 3.5));
     camera.lookAt(0, 0, 0);
+    framedRef.current = true;
   }, [camera, size]);
 
   useFrame((state) => {
