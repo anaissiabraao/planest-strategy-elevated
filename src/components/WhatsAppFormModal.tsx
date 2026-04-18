@@ -332,7 +332,7 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
           </div>
 
           {/* Scrollable form area */}
-          <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-8 sm:py-6" style={{ WebkitOverflowScrolling: "touch" }}>
+          <div className={`flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 py-5 sm:py-6 w-full ${fullscreen ? "sm:px-12" : "sm:px-8"}`} style={{ WebkitOverflowScrolling: "touch" }}>
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={step}
