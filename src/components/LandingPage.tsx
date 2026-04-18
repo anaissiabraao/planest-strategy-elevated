@@ -1,13 +1,15 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import dashboardMockup from "@/assets/dashboard-mockup.png";
 import logo from "@/assets/logo.jpg";
 import FeaturesGrid from "@/components/landing/FeaturesGrid";
 import Testimonials from "@/components/landing/Testimonials";
 import PricingSection from "@/components/landing/PricingSection";
 import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
+
+const HeroModel = lazy(() => import("@/components/landing/HeroModel"));
 
 const SAAS_URL = "https://www.planest.com.br/saas/";
 
@@ -87,17 +89,13 @@ export default function LandingPage() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
-              <div className="rounded-2xl overflow-hidden shadow-2xl shadow-foreground/10 border border-border/50">
-                <img
-                  src={dashboardMockup}
-                  alt="Dashboard do Planest - planejamento estratégico"
-                  width={1440}
-                  height={900}
-                  className="w-full h-auto"
-                />
+              <div className="rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[4/3]">
+                <Suspense fallback={<div className="w-full h-full" />}>
+                  <HeroModel className="w-full h-full" />
+                </Suspense>
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
-              <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
             </motion.div>
           </div>
         </div>
@@ -207,22 +205,17 @@ export default function LandingPage() {
             <motion.div
               variants={fadeUp}
               custom={1}
-              className="relative rounded-2xl overflow-hidden shadow-2xl shadow-foreground/10 border border-border/50"
+              className="relative rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br from-muted/40 to-background aspect-[16/9] max-w-5xl mx-auto"
             >
-              <img
-                src={dashboardMockup}
-                alt="Planest Dashboard"
-                width={1440}
-                height={900}
-                loading="lazy"
-                className="w-full h-auto"
-              />
-              <div className="absolute inset-0 hidden lg:block">
+              <Suspense fallback={<div className="w-full h-full" />}>
+                <HeroModel className="w-full h-full" />
+              </Suspense>
+              <div className="absolute inset-0 hidden lg:block pointer-events-none">
                 {[
-                  { label: "Planejamento estruturado", top: "18%", left: "22%" },
-                  { label: "Gestão de clientes", top: "18%", left: "62%" },
-                  { label: "Acompanhamento de execução", top: "58%", left: "22%" },
-                  { label: "Centralização de dados", top: "58%", left: "62%" },
+                  { label: "Planejamento estruturado", top: "18%", left: "10%" },
+                  { label: "Gestão de clientes", top: "18%", left: "72%" },
+                  { label: "Acompanhamento de execução", top: "72%", left: "10%" },
+                  { label: "Centralização de dados", top: "72%", left: "72%" },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -230,11 +223,11 @@ export default function LandingPage() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 + i * 0.15 }}
-                    className="absolute group cursor-default"
+                    className="absolute group"
                     style={{ top: item.top, left: item.left }}
                   >
-                    <span className="inline-flex items-center gap-2 bg-foreground/90 backdrop-blur-sm text-background text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg group-hover:bg-accent transition-colors duration-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:bg-background" />
+                    <span className="inline-flex items-center gap-2 bg-foreground/90 text-background text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                       {item.label}
                     </span>
                   </motion.div>
