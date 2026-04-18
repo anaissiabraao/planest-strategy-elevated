@@ -9,7 +9,7 @@ import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import HeroModel from "@/components/landing/HeroModel";
 
-const SAAS_URL = "https://www.planest.com.br/saas/";
+const SAAS_URL = "https://saas.planest.com.br/";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
