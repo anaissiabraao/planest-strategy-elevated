@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Bot, X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { useAutoCollapse } from "@/hooks/useAutoCollapse";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -14,6 +15,7 @@ export default function AIChatWidget() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { expanded, expand, collapseNow } = useAutoCollapse(4000, 4000);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -60,11 +62,20 @@ export default function AIChatWidget() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
-            onClick={() => setOpen(true)}
-            className="fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-110 transition-transform duration-300"
+            onClick={() => {
+              collapseNow();
+              setOpen(true);
+            }}
+            onMouseEnter={expand}
+            onTouchStart={expand}
+            onFocus={expand}
+            style={{ bottom: "calc(5rem + env(safe-area-inset-bottom))" }}
+            className={`fixed right-5 z-50 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-110 transition-all duration-300 ${
+              expanded ? "w-14 h-14 opacity-100" : "w-10 h-10 opacity-60 hover:opacity-100"
+            }`}
             aria-label="Abrir chat com IA"
           >
-            <Bot size={26} />
+            <Bot size={expanded ? 24 : 18} className="transition-all duration-300" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -77,7 +88,8 @@ export default function AIChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-3rem)] h-[500px] max-h-[calc(100vh-8rem)] rounded-2xl border border-border bg-card shadow-2xl flex flex-col overflow-hidden"
+            style={{ bottom: "calc(5rem + env(safe-area-inset-bottom))" }}
+            className="fixed right-5 z-50 w-[360px] max-w-[calc(100vw-2.5rem)] h-[500px] max-h-[calc(100dvh-8rem)] rounded-2xl border border-border bg-card shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-primary text-primary-foreground rounded-t-2xl">

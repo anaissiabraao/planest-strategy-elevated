@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Sparkles, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAutoCollapse } from "@/hooks/useAutoCollapse";
 
 interface Message {
   role: "user" | "assistant";
@@ -23,6 +24,7 @@ export default function FormAIHelper({ currentStep }: { currentStep: number }) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { expanded, expand, collapseNow } = useAutoCollapse(4000, 4000);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -77,15 +79,26 @@ export default function FormAIHelper({ currentStep }: { currentStep: number }) {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            onClick={() => setOpen(true)}
-            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 px-3 md:px-4 py-2.5 md:py-3 rounded-full shadow-lg text-xs md:text-sm font-medium transition-all hover:scale-105"
+            onClick={() => {
+              collapseNow();
+              setOpen(true);
+            }}
+            onMouseEnter={expand}
+            onTouchStart={expand}
+            onFocus={expand}
+            className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 rounded-full shadow-lg font-medium transition-all duration-300 hover:scale-105 ${
+              expanded
+                ? "px-3 md:px-4 py-2.5 md:py-3 text-xs md:text-sm opacity-100"
+                : "w-9 h-9 md:w-10 md:h-10 p-0 justify-center opacity-60 hover:opacity-100"
+            }`}
             style={{
               background: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))",
               color: "white",
             }}
+            aria-label="Precisa de ajuda?"
           >
-            <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
-            Precisa de ajuda?
+            <Sparkles className={expanded ? "w-3.5 h-3.5 md:w-4 md:h-4" : "w-4 h-4"} />
+            {expanded && <span className="whitespace-nowrap">Precisa de ajuda?</span>}
           </motion.button>
         )}
       </AnimatePresence>
