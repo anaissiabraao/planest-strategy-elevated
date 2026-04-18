@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -8,8 +7,7 @@ import Testimonials from "@/components/landing/Testimonials";
 import PricingSection from "@/components/landing/PricingSection";
 import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
-
-const HeroModel = lazy(() => import("@/components/landing/HeroModel"));
+import HeroModel from "@/components/landing/HeroModel";
 
 const SAAS_URL = "https://www.planest.com.br/saas/";
 
