@@ -8,11 +8,12 @@ function Model({ accentHsl }: { accentHsl: string }) {
   const ref = useRef<THREE.Group>(null);
   const { camera, size } = useThree();
 
-  // Apply orange + white materials and auto-fit
   const fittedScene = useMemo(() => {
+    const scene = gltf.scene.clone(true);
     const orange = new THREE.Color(accentHsl);
     let i = 0;
-    gltf.scene.traverse((child) => {
+
+    scene.traverse((child) => {
       const mesh = child as THREE.Mesh;
       if (mesh.isMesh) {
         const useOrange = i % 2 === 0;
@@ -25,19 +26,17 @@ function Model({ accentHsl }: { accentHsl: string }) {
       }
     });
 
-    // Auto-center
-    const box = new THREE.Box3().setFromObject(gltf.scene);
+    const box = new THREE.Box3().setFromObject(scene);
     const center = box.getCenter(new THREE.Vector3());
     const sizeVec = box.getSize(new THREE.Vector3());
-    gltf.scene.position.sub(center);
+    scene.position.sub(center);
 
-    // Normalize to fit in a ~2.5 unit cube
     const maxDim = Math.max(sizeVec.x, sizeVec.y, sizeVec.z) || 1;
     const scale = 2.5 / maxDim;
-    gltf.scene.scale.setScalar(scale);
+    scene.scale.setScalar(scale);
 
-    return gltf.scene;
-  }, [gltf, accentHsl]);
+    return scene;
+  }, [gltf.scene, accentHsl]);
 
   // Adjust camera to frame the object
   useEffect(() => {
