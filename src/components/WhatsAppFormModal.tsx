@@ -250,38 +250,62 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl p-0 border-0 bg-transparent shadow-none [&>button]:hidden max-h-[90dvh] overflow-hidden">
-        <div className="relative rounded-2xl overflow-hidden" style={{ background: "hsl(var(--dark-bg))" }}>
-          {/* Close button */}
-          <button
-            onClick={() => onOpenChange(false)}
-            className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-            style={{ background: "hsl(var(--dark-bg-foreground) / 0.1)", color: "hsl(var(--dark-bg-foreground) / 0.5)" }}
-          >
-            <X className="w-4 h-4" />
-          </button>
+      <DialogContent
+        className="p-0 border-0 bg-transparent shadow-none [&>button]:hidden gap-0
+          w-screen max-w-full h-[100dvh] sm:h-auto sm:max-h-[92dvh] sm:max-w-xl sm:w-auto
+          top-auto bottom-0 translate-y-0 left-1/2 -translate-x-1/2
+          sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2
+          rounded-none sm:rounded-2xl overflow-hidden
+          data-[state=open]:slide-in-from-bottom-full data-[state=closed]:slide-out-to-bottom-full
+          sm:data-[state=open]:slide-in-from-bottom-0 sm:data-[state=closed]:slide-out-to-bottom-0"
+      >
+        <div className="relative flex flex-col h-full sm:h-auto rounded-t-3xl sm:rounded-2xl overflow-hidden" style={{ background: "hsl(var(--dark-bg))" }}>
+          {/* Drag handle (mobile) */}
+          <div className="sm:hidden flex justify-center pt-2 pb-1 flex-shrink-0">
+            <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(var(--dark-bg-foreground) / 0.2)" }} />
+          </div>
 
-          <div className="p-5 md:p-8 overflow-y-auto max-h-[85dvh]">
-            {/* Header */}
-            <div className="text-center mb-4">
-              <div className="w-12 h-12 rounded-full bg-[#25D366]/20 flex items-center justify-center mx-auto mb-3">
+          {/* Header - sticky */}
+          <div
+            className="flex-shrink-0 px-5 pt-3 pb-4 sm:px-8 sm:pt-6 border-b sm:border-0 relative"
+            style={{ borderColor: "hsl(var(--dark-bg-foreground) / 0.08)" }}
+          >
+            <button
+              onClick={() => onOpenChange(false)}
+              aria-label="Fechar"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-colors active:scale-95"
+              style={{ background: "hsl(var(--dark-bg-foreground) / 0.1)", color: "hsl(var(--dark-bg-foreground) / 0.7)" }}
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="text-center pr-10">
+              <div className="hidden sm:flex w-12 h-12 rounded-full bg-[#25D366]/20 items-center justify-center mx-auto mb-3">
                 <MessageSquare className="w-6 h-6 text-[#25D366]" />
               </div>
-              <h2 className="text-lg md:text-xl font-bold" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
+              <div className="flex sm:hidden items-center justify-center gap-2 mb-1">
+                <div className="w-7 h-7 rounded-full bg-[#25D366]/20 flex items-center justify-center">
+                  <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
+                </div>
+                <h2 className="text-base font-bold" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
+                  Falar com nosso time
+                </h2>
+              </div>
+              <h2 className="hidden sm:block text-xl font-bold" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
                 Fale com nosso time pelo WhatsApp
               </h2>
-              <p className="mt-1 text-xs md:text-sm" style={{ color: "hsl(var(--dark-bg-foreground) / 0.5)" }}>
+              <p className="hidden sm:block mt-1 text-sm" style={{ color: "hsl(var(--dark-bg-foreground) / 0.5)" }}>
                 Responda rapidamente para que nosso atendente já tenha suas informações em mãos.
               </p>
             </div>
 
             {/* Progress */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between text-[10px] md:text-xs mb-1.5" style={{ color: "hsl(var(--dark-bg-foreground) / 0.5)" }}>
-                <span>Etapa {step + 1} de {totalSteps}</span>
+            <div className="mt-3 sm:mt-4">
+              <div className="flex items-center justify-between text-[11px] sm:text-xs mb-1.5" style={{ color: "hsl(var(--dark-bg-foreground) / 0.6)" }}>
+                <span className="font-medium">Etapa {step + 1} de {totalSteps}</span>
                 <span>{Math.round(progress)}%</span>
               </div>
-              <div className="h-1 rounded-full" style={{ background: "hsl(var(--dark-bg-foreground) / 0.1)" }}>
+              <div className="h-1.5 rounded-full" style={{ background: "hsl(var(--dark-bg-foreground) / 0.1)" }}>
                 <motion.div
                   className="h-full rounded-full"
                   style={{ background: "hsl(var(--accent))" }}
@@ -290,170 +314,186 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
                 />
               </div>
             </div>
+          </div>
 
-            {/* Form Steps */}
-            <div className="rounded-xl p-4 md:p-6 border" style={{
-              background: "hsl(var(--dark-bg-foreground) / 0.03)",
-              borderColor: "hsl(var(--dark-bg-foreground) / 0.08)",
-            }}>
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={step}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                >
-                  {/* Step Icon */}
-                  <div className="flex items-center gap-2.5 mb-4">
-                    <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "hsl(var(--accent) / 0.15)" }}>
-                      <StepIcon className="w-4 h-4" style={{ color: "hsl(var(--accent))" }} />
-                    </div>
-                    <h3 className="text-sm md:text-base font-semibold" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
-                      {step === 0 && "Vamos nos conhecer"}
-                      {step === 1 && "Qual é o seu perfil?"}
-                      {step === 2 && "Tamanho da sua equipe"}
-                      {step === 3 && "Quais são suas dores?"}
-                      {step === 4 && "Suas ferramentas e rotina"}
-                      {step === 5 && "Seu maior desafio"}
-                    </h3>
+          {/* Scrollable form area */}
+          <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-8 sm:py-6" style={{ WebkitOverflowScrolling: "touch" }}>
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={step}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {/* Step Icon + title */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "hsl(var(--accent) / 0.15)" }}>
+                    <StepIcon className="w-5 h-5" style={{ color: "hsl(var(--accent))" }} />
                   </div>
+                  <h3 className="text-base sm:text-lg font-semibold leading-tight" style={{ color: "hsl(var(--dark-bg-foreground))" }}>
+                    {step === 0 && "Vamos nos conhecer"}
+                    {step === 1 && "Qual é o seu perfil?"}
+                    {step === 2 && "Tamanho da sua equipe"}
+                    {step === 3 && "Quais são suas dores?"}
+                    {step === 4 && "Suas ferramentas e rotina"}
+                    {step === 5 && "Seu maior desafio"}
+                  </h3>
+                </div>
 
-                  {/* Step 0 */}
-                  {step === 0 && (
-                    <div className="space-y-3">
-                      <div>
-                        <label className="text-xs font-medium mb-1 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>Seu nome</label>
-                        <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Digite seu nome completo" className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base h-11" />
-                      </div>
-                      <div>
-                        <label className="text-xs font-medium mb-1 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>Seu e-mail</label>
-                        <Input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="seu@email.com" className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base h-11" />
-                      </div>
-                      <div>
-                        <label className="text-xs font-medium mb-1 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>Telefone <span className="text-white/40">(opcional)</span></label>
-                        <Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="(00) 00000-0000" className="bg-transparent border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base h-11" />
-                      </div>
+                {/* Step 0 */}
+                {step === 0 && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-xs font-medium mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>Seu nome</label>
+                      <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Digite seu nome completo" autoComplete="name" className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base h-12 rounded-xl" />
                     </div>
-                  )}
+                    <div>
+                      <label className="text-xs font-medium mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>Seu e-mail</label>
+                      <Input type="email" inputMode="email" autoComplete="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="seu@email.com" className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base h-12 rounded-xl" />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium mb-1.5 block" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>Telefone <span className="text-white/40">(opcional)</span></label>
+                      <Input type="tel" inputMode="tel" autoComplete="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="(00) 00000-0000" className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent text-base h-12 rounded-xl" />
+                    </div>
+                  </div>
+                )}
 
-                  {/* Step 1 */}
-                  {step === 1 && (
-                    <div className="grid gap-2">
-                      {ROLE_OPTIONS.map((opt) => (
-                        <button key={opt.value} onClick={() => setFormData({ ...formData, role: opt.value })} className="flex items-center gap-3 p-3 rounded-xl border text-left transition-all duration-200" style={{ borderColor: formData.role === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)", background: formData.role === opt.value ? "hsl(var(--accent) / 0.1)" : "transparent", color: "hsl(var(--dark-bg-foreground))" }}>
-                          <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0" style={{ borderColor: formData.role === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.2)" }}>
-                            {formData.role === opt.value && <div className="w-2.5 h-2.5 rounded-full" style={{ background: "hsl(var(--accent))" }} />}
+                {/* Step 1 */}
+                {step === 1 && (
+                  <div className="grid gap-2.5">
+                    {ROLE_OPTIONS.map((opt) => (
+                      <button key={opt.value} onClick={() => setFormData({ ...formData, role: opt.value })} className="flex items-center gap-3 p-4 rounded-xl border text-left transition-all duration-200 active:scale-[0.99] min-h-[56px]" style={{ borderColor: formData.role === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.1)", background: formData.role === opt.value ? "hsl(var(--accent) / 0.1)" : "hsl(var(--dark-bg-foreground) / 0.02)", color: "hsl(var(--dark-bg-foreground))" }}>
+                        <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0" style={{ borderColor: formData.role === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.25)" }}>
+                          {formData.role === opt.value && <div className="w-2.5 h-2.5 rounded-full" style={{ background: "hsl(var(--accent))" }} />}
+                        </div>
+                        <span className="text-sm sm:text-base font-medium">{opt.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Step 2 */}
+                {step === 2 && (
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {SIZE_OPTIONS.map((opt) => (
+                      <button key={opt.value} onClick={() => setFormData({ ...formData, company_size: opt.value })} className="p-4 rounded-xl border text-center transition-all duration-200 active:scale-[0.98] min-h-[64px] flex items-center justify-center" style={{ borderColor: formData.company_size === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.1)", background: formData.company_size === opt.value ? "hsl(var(--accent) / 0.1)" : "hsl(var(--dark-bg-foreground) / 0.02)", color: "hsl(var(--dark-bg-foreground))" }}>
+                        <span className="text-sm sm:text-base font-medium">{opt.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Step 3 */}
+                {step === 3 && (
+                  <div className="space-y-3">
+                    <p className="text-xs" style={{ color: "hsl(var(--dark-bg-foreground) / 0.55)" }}>Selecione todas que se aplicam</p>
+                    <div className="grid gap-2.5">
+                      {PAIN_OPTIONS.map((opt) => (
+                        <button key={opt.id} onClick={() => togglePain(opt.id)} className="flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200 active:scale-[0.99] min-h-[52px]" style={{ borderColor: formData.pain_points.includes(opt.id) ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.1)", background: formData.pain_points.includes(opt.id) ? "hsl(var(--accent) / 0.1)" : "hsl(var(--dark-bg-foreground) / 0.02)", color: "hsl(var(--dark-bg-foreground))" }}>
+                          <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 border-2" style={{ borderColor: formData.pain_points.includes(opt.id) ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.25)", background: formData.pain_points.includes(opt.id) ? "hsl(var(--accent))" : "transparent" }}>
+                            {formData.pain_points.includes(opt.id) && <CheckCircle2 className="w-3.5 h-3.5 text-white" />}
                           </div>
-                          <span className="text-sm font-medium">{opt.label}</span>
+                          <span className="text-sm sm:text-base">{opt.label}</span>
                         </button>
                       ))}
                     </div>
-                  )}
+                  </div>
+                )}
 
-                  {/* Step 2 */}
-                  {step === 2 && (
-                    <div className="grid grid-cols-2 gap-2">
-                      {SIZE_OPTIONS.map((opt) => (
-                        <button key={opt.value} onClick={() => setFormData({ ...formData, company_size: opt.value })} className="p-3 rounded-xl border text-center transition-all duration-200" style={{ borderColor: formData.company_size === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)", background: formData.company_size === opt.value ? "hsl(var(--accent) / 0.1)" : "transparent", color: "hsl(var(--dark-bg-foreground))" }}>
-                          <span className="text-sm font-medium">{opt.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Step 3 */}
-                  {step === 3 && (
-                    <div className="space-y-2">
-                      <p className="text-xs mb-2" style={{ color: "hsl(var(--dark-bg-foreground) / 0.5)" }}>Selecione todas as opções que se aplicam</p>
-                      <div className="grid gap-2">
-                        {PAIN_OPTIONS.map((opt) => (
-                          <button key={opt.id} onClick={() => togglePain(opt.id)} className="flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all duration-200" style={{ borderColor: formData.pain_points.includes(opt.id) ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)", background: formData.pain_points.includes(opt.id) ? "hsl(var(--accent) / 0.1)" : "transparent", color: "hsl(var(--dark-bg-foreground))" }}>
-                            <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 border" style={{ borderColor: formData.pain_points.includes(opt.id) ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.2)", background: formData.pain_points.includes(opt.id) ? "hsl(var(--accent))" : "transparent" }}>
-                              {formData.pain_points.includes(opt.id) && <CheckCircle2 className="w-3.5 h-3.5 text-white" />}
-                            </div>
-                            <span className="text-sm">{opt.label}</span>
+                {/* Step 4 */}
+                {step === 4 && (
+                  <div className="space-y-5">
+                    <div>
+                      <p className="text-sm font-semibold mb-2.5" style={{ color: "hsl(var(--dark-bg-foreground) / 0.85)" }}>O que você usa hoje para planejar?</p>
+                      <div className="grid gap-2.5">
+                        {TOOL_OPTIONS.map((opt) => (
+                          <button key={opt.value} onClick={() => setFormData({ ...formData, current_tools: opt.value })} className="flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200 active:scale-[0.99] min-h-[52px]" style={{ borderColor: formData.current_tools === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.1)", background: formData.current_tools === opt.value ? "hsl(var(--accent) / 0.1)" : "hsl(var(--dark-bg-foreground) / 0.02)", color: "hsl(var(--dark-bg-foreground))" }}>
+                            <Wrench className="w-4 h-4 flex-shrink-0" style={{ color: formData.current_tools === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.4)" }} />
+                            <span className="text-sm sm:text-base">{opt.label}</span>
                           </button>
                         ))}
                       </div>
                     </div>
-                  )}
-
-                  {/* Step 4 */}
-                  {step === 4 && (
-                    <div className="space-y-4">
-                      <div>
-                        <p className="text-sm font-medium mb-2" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>O que você usa hoje para planejar?</p>
-                        <div className="grid gap-2">
-                          {TOOL_OPTIONS.map((opt) => (
-                            <button key={opt.value} onClick={() => setFormData({ ...formData, current_tools: opt.value })} className="flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all duration-200" style={{ borderColor: formData.current_tools === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)", background: formData.current_tools === opt.value ? "hsl(var(--accent) / 0.1)" : "transparent", color: "hsl(var(--dark-bg-foreground))" }}>
-                              <Wrench className="w-4 h-4 flex-shrink-0" style={{ color: formData.current_tools === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.3)" }} />
-                              <span className="text-sm">{opt.label}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-2" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>Com que frequência faz planejamento estratégico?</p>
-                        <div className="grid gap-2">
-                          {FREQUENCY_OPTIONS.map((opt) => (
-                            <button key={opt.value} onClick={() => setFormData({ ...formData, strategic_planning_frequency: opt.value })} className="flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all duration-200" style={{ borderColor: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.08)", background: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent) / 0.1)" : "transparent", color: "hsl(var(--dark-bg-foreground))" }}>
-                              <BarChart3 className="w-4 h-4 flex-shrink-0" style={{ color: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.3)" }} />
-                              <span className="text-sm">{opt.label}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 5 */}
-                  {step === 5 && (
                     <div>
-                      <p className="text-sm mb-3" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
-                        Em uma frase, qual o maior desafio que você enfrenta hoje com planejamento estratégico?
-                      </p>
-                      <textarea
-                        value={formData.biggest_challenge}
-                        onChange={(e) => setFormData({ ...formData, biggest_challenge: e.target.value })}
-                        placeholder="Ex: Não consigo acompanhar a execução dos planos de ação dos meus clientes..."
-                        rows={3}
-                        className="w-full rounded-xl p-3 text-base bg-transparent border resize-none focus:outline-none focus:ring-2"
-                        style={{ borderColor: "hsl(var(--dark-bg-foreground) / 0.1)", color: "hsl(var(--dark-bg-foreground))" }}
-                      />
+                      <p className="text-sm font-semibold mb-2.5" style={{ color: "hsl(var(--dark-bg-foreground) / 0.85)" }}>Com que frequência faz planejamento?</p>
+                      <div className="grid gap-2.5">
+                        {FREQUENCY_OPTIONS.map((opt) => (
+                          <button key={opt.value} onClick={() => setFormData({ ...formData, strategic_planning_frequency: opt.value })} className="flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200 active:scale-[0.99] min-h-[52px]" style={{ borderColor: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.1)", background: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent) / 0.1)" : "hsl(var(--dark-bg-foreground) / 0.02)", color: "hsl(var(--dark-bg-foreground))" }}>
+                            <BarChart3 className="w-4 h-4 flex-shrink-0" style={{ color: formData.strategic_planning_frequency === opt.value ? "hsl(var(--accent))" : "hsl(var(--dark-bg-foreground) / 0.4)" }} />
+                            <span className="text-sm sm:text-base">{opt.label}</span>
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Navigation */}
-              <div className="flex items-center justify-between mt-5">
-                {step > 0 ? (
-                  <button onClick={prev} className="flex items-center gap-2 text-sm font-medium transition-colors" style={{ color: "hsl(var(--dark-bg-foreground) / 0.5)" }}>
-                    <ArrowLeft className="w-4 h-4" /> Voltar
-                  </button>
-                ) : (
-                  <button onClick={handleSkip} className="text-sm transition-colors" style={{ color: "hsl(var(--dark-bg-foreground) / 0.3)" }}>
-                    Pular e ir direto
-                  </button>
+                  </div>
                 )}
 
-                {step < totalSteps - 1 ? (
-                  <Button variant="cta" onClick={next} disabled={!canAdvance()} className="rounded-full px-6 gap-2">
-                    Continuar <ArrowRight className="w-4 h-4" />
-                  </Button>
-                ) : (
-                  <Button variant="cta" onClick={handleSubmit} disabled={!canAdvance() || submitting} className="rounded-full px-6 gap-2 bg-[#25D366] hover:bg-[#20bd5a]">
-                    {submitting ? "Enviando..." : "Enviar pelo WhatsApp"} <MessageSquare className="w-4 h-4" />
-                  </Button>
+                {/* Step 5 */}
+                {step === 5 && (
+                  <div>
+                    <p className="text-sm mb-3" style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}>
+                      Em uma frase, qual o maior desafio que você enfrenta hoje com planejamento estratégico?
+                    </p>
+                    <textarea
+                      value={formData.biggest_challenge}
+                      onChange={(e) => setFormData({ ...formData, biggest_challenge: e.target.value })}
+                      placeholder="Ex: Não consigo acompanhar a execução dos planos de ação dos meus clientes..."
+                      rows={5}
+                      className="w-full rounded-xl p-4 text-base bg-white/5 border resize-none focus:outline-none focus:ring-2 focus:ring-accent"
+                      style={{ borderColor: "hsl(var(--dark-bg-foreground) / 0.1)", color: "hsl(var(--dark-bg-foreground))" }}
+                    />
+                  </div>
                 )}
-              </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Sticky footer nav */}
+          <div
+            className="flex-shrink-0 border-t px-5 py-3 sm:px-8 sm:py-4 safe-bottom"
+            style={{
+              borderColor: "hsl(var(--dark-bg-foreground) / 0.08)",
+              background: "hsl(var(--dark-bg))",
+            }}
+          >
+            <div className="flex items-center justify-between gap-3">
+              {step > 0 ? (
+                <button
+                  onClick={prev}
+                  className="flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-lg transition-colors hover:bg-white/5 active:scale-95"
+                  style={{ color: "hsl(var(--dark-bg-foreground) / 0.7)" }}
+                >
+                  <ArrowLeft className="w-4 h-4" /> Voltar
+                </button>
+              ) : (
+                <button
+                  onClick={handleSkip}
+                  className="text-xs sm:text-sm transition-colors px-2 py-2 underline-offset-4 hover:underline"
+                  style={{ color: "hsl(var(--dark-bg-foreground) / 0.45)" }}
+                >
+                  Pular e ir direto
+                </button>
+              )}
+
+              {step < totalSteps - 1 ? (
+                <Button variant="cta" onClick={next} disabled={!canAdvance()} className="rounded-full px-6 h-12 gap-2 text-sm sm:text-base font-semibold flex-shrink-0">
+                  Continuar <ArrowRight className="w-4 h-4" />
+                </Button>
+              ) : (
+                <Button variant="cta" onClick={handleSubmit} disabled={!canAdvance() || submitting} className="rounded-full px-5 sm:px-6 h-12 gap-2 text-sm sm:text-base font-semibold bg-[#25D366] hover:bg-[#20bd5a] flex-shrink-0">
+                  {submitting ? "Enviando..." : "Enviar pelo WhatsApp"} <MessageSquare className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           </div>
 
-          <FormAIHelper currentStep={step} />
+          {/* Hide AI helper on small screens (avoid overlap with sticky nav) */}
+          <div className="hidden sm:block">
+            <FormAIHelper currentStep={step} />
+          </div>
         </div>
       </DialogContent>
     </Dialog>

@@ -155,44 +155,44 @@ const features = [
 
 export default function FeaturesGrid() {
   return (
-    <section id="funcionalidades" className="py-32">
+    <section id="funcionalidades" className="py-20 md:py-32">
       <div className="section-padding max-w-[1400px] mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
-          className="space-y-16"
+          className="space-y-12 md:space-y-16"
         >
-          <motion.div variants={fadeUp} custom={0} className="text-center max-w-2xl mx-auto space-y-4">
-            <p className="text-sm font-semibold tracking-widest uppercase text-accent">
+          <motion.div variants={fadeUp} custom={0} className="text-center max-w-2xl mx-auto space-y-3 md:space-y-4">
+            <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-accent">
               Funcionalidades
             </p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
               Tudo que o Planest oferece
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               Um sistema completo para montar, executar e acompanhar o planejamento estratégico dos seus clientes.
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {features.map((feature, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
                 custom={i}
-                className="group p-6 rounded-2xl border border-border bg-card hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
+                className="group p-5 sm:p-6 rounded-2xl border border-border bg-card hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300 cursor-pointer">
-                  <feature.Icon size={24} />
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
+                  <feature.Icon size={22} />
                 </div>
-                <h3 className="font-heading text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
+                <h3 className="font-heading text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3 group-hover:text-accent transition-colors">
                   {feature.title}
                 </h3>
                 <ul className="space-y-1.5">
                   {feature.items.map((item, j) => (
-                    <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
+                    <li key={j} className="text-xs sm:text-sm text-muted-foreground flex items-start gap-2">
                       <span className="w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
                       {item}
                     </li>
