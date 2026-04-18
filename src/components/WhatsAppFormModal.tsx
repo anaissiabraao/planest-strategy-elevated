@@ -294,7 +294,7 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
               </button>
             </div>
 
-            <div className="text-center pr-10">
+            <div className="text-center pr-24">
               <div className="hidden sm:flex w-12 h-12 rounded-full bg-[#25D366]/20 items-center justify-center mx-auto mb-3">
                 <MessageSquare className="w-6 h-6 text-[#25D366]" />
               </div>
