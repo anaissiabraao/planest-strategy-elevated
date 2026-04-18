@@ -11,6 +11,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-654688854"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-654688854');
+      gtag('config', 'AW-18095594498');
+
+      // Helper for WhatsApp click conversion
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18095594498/yVEFCMHOsp0cEIK407RD',
+          'value': 1.0,
+          'currency': 'BRL',
+          'event_callback': callback
+        });
+        return false;
+      }
+    </script>
+
     <!-- TODO: Update og:title to match your application name -->
     
     
