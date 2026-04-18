@@ -28,20 +28,20 @@ const planFeatures = [
 
 export default function PricingSection() {
   return (
-    <section id="planos" className="py-32">
+    <section id="planos" className="py-20 md:py-32">
       <div className="section-padding max-w-[1400px] mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
-          className="space-y-16"
+          className="space-y-12 md:space-y-16"
         >
-          <motion.div variants={fadeUp} custom={0} className="text-center max-w-2xl mx-auto space-y-4">
-            <p className="text-sm font-semibold tracking-widest uppercase text-accent">
+          <motion.div variants={fadeUp} custom={0} className="text-center max-w-2xl mx-auto space-y-3 md:space-y-4">
+            <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-accent">
               Plano
             </p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
               Para Consultores
             </h2>
           </motion.div>
@@ -49,32 +49,32 @@ export default function PricingSection() {
           <motion.div
             variants={fadeUp}
             custom={1}
-            className="max-w-2xl mx-auto rounded-2xl border-2 border-accent/30 bg-card p-10 relative overflow-hidden"
+            className="max-w-2xl mx-auto rounded-2xl border-2 border-accent/30 bg-card p-6 sm:p-10 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-40 h-40 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
-            <div className="relative z-10 space-y-8">
-              <h3 className="font-heading text-2xl font-bold text-foreground">
+            <div className="relative z-10 space-y-6 sm:space-y-8">
+              <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground">
                 Sistema completo para montar o planejamento estratégico
               </h3>
 
-              <ul className="space-y-3">
+              <ul className="space-y-2.5 sm:space-y-3">
                 {planFeatures.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
                       ✓
                     </span>
-                    <span className="text-muted-foreground">{feature}</span>
+                    <span className="text-sm sm:text-base text-muted-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="space-y-2 text-sm text-muted-foreground border-t border-border pt-6">
+              <div className="space-y-2 text-xs sm:text-sm text-muted-foreground border-t border-border pt-5 sm:pt-6">
                 <p>*Consultar o valor adicional por usuário</p>
                 <p>**Consultar os tipos de planos</p>
               </div>
 
-              <Button variant="cta" size="lg" className="rounded-full text-base px-10 h-13 w-full sm:w-auto" asChild>
+              <Button variant="cta" size="lg" className="rounded-full text-base px-8 sm:px-10 h-12 sm:h-13 w-full sm:w-auto" asChild>
                 <a href="https://wa.me/5547999507669?text=Olá! Gostaria de solicitar mais informações sobre o Planest." target="_blank" rel="noopener noreferrer">
                   Solicite mais informações
                 </a>
