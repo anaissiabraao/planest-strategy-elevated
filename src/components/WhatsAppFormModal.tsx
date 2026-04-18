@@ -252,33 +252,47 @@ export default function WhatsAppFormModal({ open, onOpenChange }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="p-0 border-0 bg-transparent shadow-none [&>button]:hidden gap-0
-          w-screen max-w-full h-[100dvh] sm:h-auto sm:max-h-[92dvh] sm:max-w-xl sm:w-auto
-          top-auto bottom-0 translate-y-0 left-1/2 -translate-x-1/2
-          sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2
-          rounded-none sm:rounded-2xl overflow-hidden
-          data-[state=open]:slide-in-from-bottom-full data-[state=closed]:slide-out-to-bottom-full
-          sm:data-[state=open]:slide-in-from-bottom-0 sm:data-[state=closed]:slide-out-to-bottom-0"
+        className={`p-0 border-0 bg-transparent shadow-none [&>button]:hidden gap-0 grid-rows-[1fr]
+          left-1/2 -translate-x-1/2
+          ${
+            fullscreen
+              ? "w-screen max-w-full h-[100dvh] top-0 bottom-0 translate-y-0 rounded-none"
+              : "w-screen max-w-full h-[100dvh] sm:h-auto sm:max-h-[92dvh] sm:max-w-xl sm:w-auto top-auto bottom-0 translate-y-0 sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2 rounded-none sm:rounded-2xl"
+          }
+          overflow-hidden`}
       >
-        <div className="relative flex flex-col h-full sm:h-auto rounded-t-3xl sm:rounded-2xl overflow-hidden" style={{ background: "hsl(var(--dark-bg))" }}>
-          {/* Drag handle (mobile) */}
-          <div className="sm:hidden flex justify-center pt-2 pb-1 flex-shrink-0">
-            <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(var(--dark-bg-foreground) / 0.2)" }} />
-          </div>
+        <div className={`relative flex flex-col h-full overflow-hidden ${fullscreen ? "rounded-none" : "rounded-t-3xl sm:rounded-2xl"}`} style={{ background: "hsl(var(--dark-bg))" }}>
+          {/* Drag handle (mobile, only when not fullscreen) */}
+          {!fullscreen && (
+            <div className="sm:hidden flex justify-center pt-2 pb-1 flex-shrink-0">
+              <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(var(--dark-bg-foreground) / 0.2)" }} />
+            </div>
+          )}
 
           {/* Header - sticky */}
           <div
             className="flex-shrink-0 px-5 pt-3 pb-4 sm:px-8 sm:pt-6 border-b sm:border-0 relative"
             style={{ borderColor: "hsl(var(--dark-bg-foreground) / 0.08)" }}
           >
-            <button
-              onClick={() => onOpenChange(false)}
-              aria-label="Fechar"
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-colors active:scale-95"
-              style={{ background: "hsl(var(--dark-bg-foreground) / 0.1)", color: "hsl(var(--dark-bg-foreground) / 0.7)" }}
-            >
-              <X className="w-4 h-4" />
-            </button>
+            {/* Action buttons (top right) */}
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center gap-2">
+              <button
+                onClick={() => setFullscreen((f) => !f)}
+                aria-label={fullscreen ? "Sair de tela cheia" : "Expandir para tela cheia"}
+                className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center transition-all active:scale-95 hover:bg-white/15"
+                style={{ background: "hsl(var(--dark-bg-foreground) / 0.1)", color: "hsl(var(--dark-bg-foreground) / 0.7)" }}
+              >
+                {fullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              </button>
+              <button
+                onClick={() => onOpenChange(false)}
+                aria-label="Fechar"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-95 hover:bg-white/15"
+                style={{ background: "hsl(var(--dark-bg-foreground) / 0.1)", color: "hsl(var(--dark-bg-foreground) / 0.7)" }}
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
 
             <div className="text-center pr-10">
               <div className="hidden sm:flex w-12 h-12 rounded-full bg-[#25D366]/20 items-center justify-center mx-auto mb-3">
