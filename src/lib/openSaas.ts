@@ -4,6 +4,7 @@
 // - Falls back to location assignment if the popup is blocked
 
 export const SAAS_URL = "https://saas.planest.com.br/";
+export const SAAS_EXIT_PATH = "/abrir-sistema";
 
 export function buildSaasUrl(): string {
   const url = new URL(SAAS_URL);
@@ -46,14 +47,15 @@ export function openSaas(e?: React.MouseEvent | MouseEvent) {
     e.stopPropagation();
   }
 
-  const target = buildSaasUrl();
+  const exitUrl = new URL(SAAS_EXIT_PATH, window.location.origin);
+  exitUrl.searchParams.set("target", buildSaasUrl());
 
   try {
     clearSharedPlanestCookies();
     window.setTimeout(() => {
-      window.location.replace(target);
+      window.location.assign(exitUrl.toString());
     }, 80);
   } catch {
-    window.location.replace(target);
+    window.location.assign(exitUrl.toString());
   }
 }
