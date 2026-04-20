@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import Privacidade from "./pages/Privacidade.tsx";
 import ParaQuem from "./pages/ParaQuem.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import OpenSaasRedirect from "./pages/OpenSaasRedirect.tsx";
 import AIChatWidget from "./components/AIChatWidget.tsx";
 import CookieConsent from "./components/CookieConsent.tsx";
 
@@ -20,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/abrir-sistema" element={<OpenSaasRedirect />} />
           <Route path="/privacidade" element={<Privacidade />} />
           <Route path="/para-quem" element={<ParaQuem />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
