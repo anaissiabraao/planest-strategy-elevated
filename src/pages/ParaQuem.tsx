@@ -15,8 +15,7 @@ import {
 } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import WhatsAppButton from "@/components/WhatsAppButton";
-
-const SAAS_URL = "https://saas.planest.com.br/";
+import { SAAS_URL, openSaas } from "@/lib/openSaas";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -83,7 +82,7 @@ export default function ParaQuem() {
             <Link to="/#funcionalidades" className="hover:text-foreground transition-colors">Funcionalidades</Link>
           </div>
           <Button variant="cta" size="sm" className="rounded-full px-6" asChild>
-            <a href={SAAS_URL} target="_blank" rel="noopener noreferrer">Acessar o sistema</a>
+            <a href={SAAS_URL} target="_blank" rel="noopener noreferrer" onClick={openSaas}>Acessar o sistema</a>
           </Button>
         </div>
       </nav>
