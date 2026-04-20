@@ -81,8 +81,8 @@ export default function ParaQuem() {
             <Link to="/" className="hover:text-foreground transition-colors">Início</Link>
             <Link to="/#funcionalidades" className="hover:text-foreground transition-colors">Funcionalidades</Link>
           </div>
-          <Button variant="cta" size="sm" className="rounded-full px-6" asChild>
-            <a href={SAAS_URL} target="_blank" rel="noopener noreferrer" onClick={openSaas}>Acessar o sistema</a>
+          <Button variant="cta" size="sm" className="rounded-full px-6" onClick={openSaas}>
+            Acessar o sistema
           </Button>
         </div>
       </nav>
