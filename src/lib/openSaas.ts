@@ -19,11 +19,7 @@ export function openSaas(e?: React.MouseEvent | MouseEvent) {
   }
   const target = buildSaasUrl();
   try {
-    const win = window.open(target, "_blank", "noopener,noreferrer");
-    if (!win) {
-      // Popup blocked — navigate the current tab as fallback
-      window.location.href = target;
-    }
+    window.location.assign(target);
   } catch {
     window.location.href = target;
   }
