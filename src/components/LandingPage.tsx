@@ -38,8 +38,8 @@ export default function LandingPage() {
             <a href="#como-funciona" className="hover:text-foreground transition-colors">Como funciona</a>
             <Link to="/para-quem" className="hover:text-foreground transition-colors">Para quem</Link>
           </div>
-          <Button variant="cta" size="sm" className="rounded-full px-6" asChild>
-            <a href={SAAS_URL} target="_blank" rel="noopener noreferrer" onClick={openSaas}>Acessar o sistema</a>
+          <Button variant="cta" size="sm" className="rounded-full px-6" onClick={openSaas}>
+            Acessar o sistema
           </Button>
         </div>
       </nav>
@@ -71,8 +71,8 @@ export default function LandingPage() {
                 clientes em um só lugar.
               </motion.p>
               <motion.div variants={fadeUp} custom={2} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Button variant="cta" size="lg" className="rounded-full text-base px-8 h-12 sm:h-13 w-full sm:w-auto" asChild>
-                  <a href={SAAS_URL} target="_blank" rel="noopener noreferrer" onClick={openSaas}>Acessar o sistema</a>
+                <Button variant="cta" size="lg" className="rounded-full text-base px-8 h-12 sm:h-13 w-full sm:w-auto" onClick={openSaas}>
+                  Acessar o sistema
                 </Button>
                 <Button variant="cta-outline" size="lg" className="rounded-full text-base px-8 h-12 sm:h-13 w-full sm:w-auto" asChild>
                   <a href="#video">Ver como funciona</a>
@@ -430,8 +430,8 @@ export default function LandingPage() {
               Sem planilhas. Sem complexidade.
             </motion.p>
             <motion.div variants={fadeUp} custom={2}>
-              <Button variant="cta" size="lg" className="rounded-full text-base sm:text-lg px-8 sm:px-10 h-12 sm:h-14 w-full sm:w-auto" asChild>
-                <a href={SAAS_URL} target="_blank" rel="noopener noreferrer" onClick={openSaas}>Começar agora</a>
+              <Button variant="cta" size="lg" className="rounded-full text-base sm:text-lg px-8 sm:px-10 h-12 sm:h-14 w-full sm:w-auto" onClick={openSaas}>
+                Começar agora
               </Button>
             </motion.div>
           </motion.div>
