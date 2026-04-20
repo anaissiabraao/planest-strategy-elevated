@@ -11,7 +11,11 @@ type Msg = { role: "user" | "assistant"; content: string };
 export default function AIChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "assistant", content: "Olá! 👋 Sou a IA do Planest. Posso te ajudar a entender como o Planest vai transformar seus projetos de consultoria. O que gostaria de saber?" },
+    {
+      role: "assistant",
+      content:
+        "Olá! 👋 Eu sou a **IA do Planest**.\n\nPosso te explicar:\n\n- 📊 Módulos de planejamento (SWOT, BSC, OKR, Canvas)\n- 🎯 Como aplicar em consultorias e PMEs\n- 🤝 Como agendar uma demonstração\n\nO que você gostaria de saber primeiro?",
+    },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
