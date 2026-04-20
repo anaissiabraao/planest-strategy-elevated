@@ -12,15 +12,48 @@ export function buildSaasUrl(): string {
   return url.toString();
 }
 
+function expireCookie(name: string, domain?: string) {
+  const domainPart = domain ? `; domain=${domain}` : "";
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; path=/${domainPart}; SameSite=Lax`;
+}
+
+function clearSharedPlanestCookies() {
+  const cookieNames = document.cookie
+    .split(";")
+    .map((entry) => entry.split("=")[0]?.trim())
+    .filter(Boolean) as string[];
+
+  const host = window.location.hostname;
+  const candidateDomains = Array.from(
+    new Set([
+      undefined,
+      host,
+      `.${host}`,
+      host.endsWith("planest.com.br") ? "planest.com.br" : undefined,
+      host.endsWith("planest.com.br") ? ".planest.com.br" : undefined,
+    ].filter(Boolean))
+  ) as string[];
+
+  cookieNames.forEach((name) => {
+    expireCookie(name);
+    candidateDomains.forEach((domain) => expireCookie(name, domain));
+  });
+}
+
 export function openSaas(e?: React.MouseEvent | MouseEvent) {
   if (e) {
     e.preventDefault();
     e.stopPropagation();
   }
+
   const target = buildSaasUrl();
+
   try {
-    window.location.assign(target);
+    clearSharedPlanestCookies();
+    window.setTimeout(() => {
+      window.location.replace(target);
+    }, 80);
   } catch {
-    window.location.href = target;
+    window.location.replace(target);
   }
 }
