@@ -431,7 +431,7 @@ export default function LandingPage() {
             </motion.p>
             <motion.div variants={fadeUp} custom={2}>
               <Button variant="cta" size="lg" className="rounded-full text-base sm:text-lg px-8 sm:px-10 h-12 sm:h-14 w-full sm:w-auto" asChild>
-                <a href={SAAS_URL} target="_blank" rel="noopener noreferrer">Começar agora</a>
+                <a href={SAAS_URL} target="_blank" rel="noopener noreferrer" onClick={openSaas}>Começar agora</a>
               </Button>
             </motion.div>
           </motion.div>
