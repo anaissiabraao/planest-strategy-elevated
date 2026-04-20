@@ -3,7 +3,7 @@
 // - Uses window.open with noopener,noreferrer to avoid session leakage
 // - Falls back to location assignment if the popup is blocked
 
-export const SAAS_URL = "https://saas.planest.com.br/";
+export const SAAS_URL = "https://saas.planest.com.br/login/";
 export const SAAS_EXIT_PATH = "/abrir-sistema";
 
 export function buildSaasUrl(): string {

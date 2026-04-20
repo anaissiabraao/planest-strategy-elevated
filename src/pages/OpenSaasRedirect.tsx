@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { buildSaasUrl, SAAS_URL } from "@/lib/openSaas";
 
+const SAAS_ORIGIN = new URL(SAAS_URL).origin;
+
 function clearWebStorage() {
   try {
     window.localStorage.clear();
@@ -55,7 +57,7 @@ export default function OpenSaasRedirect() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const requestedTarget = params.get("target");
-    const safeTarget = requestedTarget?.startsWith(SAAS_URL) ? requestedTarget : buildSaasUrl();
+    const safeTarget = requestedTarget?.startsWith(SAAS_ORIGIN) ? requestedTarget : buildSaasUrl();
 
     void (async () => {
       clearWebStorage();
