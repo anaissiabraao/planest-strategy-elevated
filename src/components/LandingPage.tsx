@@ -10,6 +10,8 @@ import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import HeroModel from "@/components/landing/HeroModel";
 import { SAAS_URL, openSaas } from "@/lib/openSaas";
+import strategyNetwork from "@/assets/strategy-network.jpg";
+import growthChart from "@/assets/growth-chart.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -173,12 +175,33 @@ export default function LandingPage() {
       {/* SOLUÇÃO */}
       <section id="solucao" className="py-20 md:py-32 bg-dark text-dark-foreground">
         <div className="section-padding max-w-[1400px] mx-auto">
-          <motion.div
+          <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="relative order-2 lg:order-1"
+            >
+              <motion.img
+                src={strategyNetwork}
+                alt="Rede de objetivos estratégicos conectados"
+                width={1280}
+                height={960}
+                loading="lazy"
+                className="w-full h-auto rounded-2xl border border-border/20 shadow-2xl"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-accent/30 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -top-8 -right-8 w-48 h-48 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+            </motion.div>
+            <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8"
+            className="space-y-6 md:space-y-8 order-1 lg:order-2"
           >
             <motion.p
               variants={fadeUp}
@@ -203,7 +226,8 @@ export default function LandingPage() {
               Transformar o caos do planejamento estratégico em um processo
               estruturado, escalável e profissional.
             </motion.p>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -403,6 +427,24 @@ export default function LandingPage() {
             >
               O que muda na sua consultoria
             </motion.h2>
+
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              className="relative max-w-md mx-auto"
+            >
+              <motion.img
+                src={growthChart}
+                alt="Gráfico de crescimento estratégico"
+                width={1280}
+                height={960}
+                loading="lazy"
+                className="w-full h-auto rounded-2xl border border-border/20 shadow-2xl"
+                animate={{ y: [0, -10, 0], rotate: [0, 1, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <div className="absolute -inset-6 bg-accent/20 rounded-full blur-3xl pointer-events-none -z-10" />
+            </motion.div>
 
             <div className="grid sm:grid-cols-3 gap-10 sm:gap-12">
               {[
