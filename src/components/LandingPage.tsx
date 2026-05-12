@@ -10,9 +10,6 @@ import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import HeroModel from "@/components/landing/HeroModel";
 import { SAAS_URL, openSaas } from "@/lib/openSaas";
-import strategyNetwork from "@/assets/strategy-network.jpg";
-import growthChart from "@/assets/growth-chart.jpg";
-import heroAnim from "@/assets/hero-anim.gif";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -65,12 +62,16 @@ export default function LandingPage() {
       {/* HERO */}
       <section className="relative min-h-[100dvh] flex items-center pt-20 pb-12 md:pb-0 bg-white overflow-hidden">
         {/* Animated wireframe background — inverted + multiply makes white transparent on white bg */}
-        <img
-          src={heroAnim}
-          alt=""
+        <video
+          src="/media/hero-anim.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
           aria-hidden="true"
-          className="pointer-events-none select-none absolute inset-0 m-auto w-[120%] max-w-none h-auto opacity-[0.18] sm:opacity-[0.22] object-cover"
-          style={{ filter: "invert(1) contrast(1.1)", mixBlendMode: "multiply" }}
+          className="pointer-events-none select-none absolute inset-0 m-auto w-[110%] max-w-none h-[110%] opacity-25 sm:opacity-30 object-cover"
+          style={{ filter: "invert(1) contrast(1.15) saturate(0)", mixBlendMode: "multiply" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-white pointer-events-none" />
         <div className="relative section-padding max-w-[1400px] mx-auto w-full">
@@ -193,13 +194,15 @@ export default function LandingPage() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="relative order-2 lg:order-1"
             >
-              <motion.img
-                src={strategyNetwork}
-                alt="Rede de objetivos estratégicos conectados"
-                width={1280}
-                height={960}
-                loading="lazy"
-                className="w-full h-auto rounded-2xl border border-border/20 shadow-2xl"
+              <motion.video
+                src="/media/scene.mov"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Demonstração da plataforma Planest"
+                className="w-full h-auto rounded-2xl border border-border/20 shadow-2xl bg-dark"
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -443,13 +446,15 @@ export default function LandingPage() {
               custom={1}
               className="relative max-w-md mx-auto"
             >
-              <motion.img
-                src={growthChart}
-                alt="Gráfico de crescimento estratégico"
-                width={1280}
-                height={960}
-                loading="lazy"
-                className="w-full h-auto rounded-2xl border border-border/20 shadow-2xl"
+              <motion.video
+                src="/media/search.mov"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Pesquisa e busca inteligente Planest"
+                className="w-full h-auto rounded-2xl border border-border/20 shadow-2xl bg-dark"
                 animate={{ y: [0, -10, 0], rotate: [0, 1, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               />
