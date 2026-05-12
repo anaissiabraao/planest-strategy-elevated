@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { BookOpen, ArrowRight } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import FeaturesGrid from "@/components/landing/FeaturesGrid";
 import Testimonials from "@/components/landing/Testimonials";
@@ -37,10 +38,24 @@ export default function LandingPage() {
             <a href="#produto" className="hover:text-foreground transition-colors">Produto</a>
             <a href="#como-funciona" className="hover:text-foreground transition-colors">Como funciona</a>
             <Link to="/para-quem" className="hover:text-foreground transition-colors">Para quem</Link>
+            <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
           </div>
-          <Button variant="cta" size="sm" className="rounded-full px-6" onClick={openSaas}>
-            Acessar o sistema
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="rounded-full px-4 hidden sm:inline-flex gap-2"
+              asChild
+            >
+              <Link to="/blog" aria-label="Ir para o Blog">
+                <BookOpen className="h-4 w-4" />
+                Blog
+              </Link>
+            </Button>
+            <Button variant="cta" size="sm" className="rounded-full px-6" onClick={openSaas}>
+              Acessar o sistema
+            </Button>
+          </div>
         </div>
       </nav>
 
@@ -54,6 +69,20 @@ export default function LandingPage() {
               variants={stagger}
               className="space-y-6 md:space-y-8 order-2 lg:order-1"
             >
+              <motion.div variants={fadeUp} custom={0}>
+                <Link
+                  to="/blog"
+                  className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/40 px-3 py-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground hover:border-accent/60 transition-colors"
+                >
+                  <span className="inline-flex items-center gap-1.5 font-semibold text-accent">
+                    <BookOpen className="h-3.5 w-3.5" />
+                    Novo
+                  </span>
+                  <span className="hidden sm:inline">Blog Planest no ar — conteúdos sobre estratégia</span>
+                  <span className="sm:hidden">Conheça nosso Blog</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </motion.div>
               <motion.h1
                 variants={fadeUp}
                 custom={0}
