@@ -12,6 +12,7 @@ import HeroModel from "@/components/landing/HeroModel";
 import { SAAS_URL, openSaas } from "@/lib/openSaas";
 import strategyNetwork from "@/assets/strategy-network.jpg";
 import growthChart from "@/assets/growth-chart.jpg";
+import heroAnim from "@/assets/hero-anim.gif";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -62,8 +63,17 @@ export default function LandingPage() {
       </nav>
 
       {/* HERO */}
-      <section className="min-h-[100dvh] flex items-center pt-20 pb-12 md:pb-0">
-        <div className="section-padding max-w-[1400px] mx-auto w-full">
+      <section className="relative min-h-[100dvh] flex items-center pt-20 pb-12 md:pb-0 bg-white overflow-hidden">
+        {/* Animated wireframe background — inverted + multiply makes white transparent on white bg */}
+        <img
+          src={heroAnim}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none select-none absolute inset-0 m-auto w-[120%] max-w-none h-auto opacity-[0.18] sm:opacity-[0.22] object-cover"
+          style={{ filter: "invert(1) contrast(1.1)", mixBlendMode: "multiply" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-white pointer-events-none" />
+        <div className="relative section-padding max-w-[1400px] mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
               initial="hidden"
