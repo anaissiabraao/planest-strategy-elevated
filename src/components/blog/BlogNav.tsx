@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Lock } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import { openSaas } from "@/lib/openSaas";
 
@@ -19,7 +19,25 @@ export default function BlogNav() {
           <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
           <Link to="/para-quem" className="hover:text-foreground transition-colors">Para quem</Link>
         </div>
-        <Button variant="cta" size="sm" className="rounded-full px-6" onClick={openSaas}>Acessar</Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-full px-4 gap-2 hidden sm:inline-flex"
+            asChild
+          >
+            <Link to="/auth" aria-label="Acessar painel administrativo">
+              <Lock className="h-3.5 w-3.5" />
+              Admin
+            </Link>
+          </Button>
+          <Button variant="ghost" size="icon" className="rounded-full sm:hidden" asChild>
+            <Link to="/auth" aria-label="Admin">
+              <Lock className="h-4 w-4" />
+            </Link>
+          </Button>
+          <Button variant="cta" size="sm" className="rounded-full px-6" onClick={openSaas}>Acessar</Button>
+        </div>
       </div>
     </nav>
   );
