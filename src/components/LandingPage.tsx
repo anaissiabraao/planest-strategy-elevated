@@ -9,6 +9,7 @@ import PricingSection from "@/components/landing/PricingSection";
 import VideoSection from "@/components/landing/VideoSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import HeroModel from "@/components/landing/HeroModel";
+import LeadFunnelSection from "@/components/landing/LeadFunnelSection";
 import { SAAS_URL, openSaas } from "@/lib/openSaas";
 
 const fadeUp = {
@@ -243,6 +244,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* FUNIL DE LEADS */}
+      <LeadFunnelSection />
 
       {/* PRODUTO */}
       <section id="produto" className="py-20 md:py-32">

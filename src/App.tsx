@@ -15,6 +15,8 @@ import NotFound from "./pages/NotFound.tsx";
 import OpenSaasRedirect from "./pages/OpenSaasRedirect.tsx";
 import AIChatWidget from "./components/AIChatWidget.tsx";
 import CookieConsent from "./components/CookieConsent.tsx";
+import ExitIntentModal from "./components/landing/ExitIntentModal.tsx";
+import { usePageTracking } from "./hooks/usePageTracking.ts";
 
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
@@ -28,6 +30,9 @@ const Categories = lazy(() => import("./pages/admin/Categories.tsx"));
 const Tags = lazy(() => import("./pages/admin/Tags.tsx"));
 const Media = lazy(() => import("./pages/admin/Media.tsx"));
 const Settings = lazy(() => import("./pages/admin/Settings.tsx"));
+const Analytics = lazy(() => import("./pages/admin/Analytics.tsx"));
+const CRM = lazy(() => import("./pages/admin/CRM.tsx"));
+const Instagram = lazy(() => import("./pages/admin/Instagram.tsx"));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -37,6 +42,8 @@ const PageLoader = () => (
 
 const queryClient = new QueryClient();
 
+function RouteTracker() { usePageTracking(); return null; }
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
@@ -45,6 +52,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
+            <RouteTracker />
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -65,6 +73,9 @@ const App = () => (
                   <Route path="tags" element={<Tags />} />
                   <Route path="midia" element={<Media />} />
                   <Route path="configuracoes" element={<Settings />} />
+                  <Route path="analitico" element={<Analytics />} />
+                  <Route path="crm" element={<CRM />} />
+                  <Route path="instagram" element={<Instagram />} />
                 </Route>
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
@@ -72,6 +83,7 @@ const App = () => (
             </Suspense>
             <AIChatWidget />
             <CookieConsent />
+            <ExitIntentModal />
           </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
