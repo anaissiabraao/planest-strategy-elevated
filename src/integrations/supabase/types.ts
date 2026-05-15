@@ -122,6 +122,92 @@ export type Database = {
         }
         Relationships: []
       }
+      instagram_posts: {
+        Row: {
+          ai_generated: boolean
+          caption: string
+          created_at: string
+          error_message: string | null
+          goal_metric: string | null
+          hashtags: string | null
+          id: string
+          ig_media_id: string | null
+          media_url: string | null
+          pillar: Database["public"]["Enums"]["ig_pillar"]
+          published_at: string | null
+          scheduled_for: string | null
+          status: Database["public"]["Enums"]["ig_post_status"]
+          updated_at: string
+        }
+        Insert: {
+          ai_generated?: boolean
+          caption: string
+          created_at?: string
+          error_message?: string | null
+          goal_metric?: string | null
+          hashtags?: string | null
+          id?: string
+          ig_media_id?: string | null
+          media_url?: string | null
+          pillar?: Database["public"]["Enums"]["ig_pillar"]
+          published_at?: string | null
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["ig_post_status"]
+          updated_at?: string
+        }
+        Update: {
+          ai_generated?: boolean
+          caption?: string
+          created_at?: string
+          error_message?: string | null
+          goal_metric?: string | null
+          hashtags?: string | null
+          id?: string
+          ig_media_id?: string | null
+          media_url?: string | null
+          pillar?: Database["public"]["Enums"]["ig_pillar"]
+          published_at?: string | null
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["ig_post_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lead_notes: {
+        Row: {
+          author_id: string | null
+          body: string
+          created_at: string
+          id: string
+          kind: string
+          lead_id: string
+        }
+        Insert: {
+          author_id?: string | null
+          body: string
+          created_at?: string
+          id?: string
+          kind?: string
+          lead_id: string
+        }
+        Update: {
+          author_id?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          lead_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_notes_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lead_responses: {
         Row: {
           biggest_challenge: string | null
@@ -161,6 +247,111 @@ export type Database = {
           phone?: string | null
           role?: string | null
           strategic_planning_frequency?: string | null
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          ai_intent: string | null
+          ai_next_action: string | null
+          ai_objectives: Json | null
+          ai_score: number | null
+          ai_suggested_message: string | null
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          owner_id: string | null
+          page: string | null
+          phone: string
+          referrer: string | null
+          source: Database["public"]["Enums"]["lead_source"]
+          status: Database["public"]["Enums"]["lead_status"]
+          updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          ai_intent?: string | null
+          ai_next_action?: string | null
+          ai_objectives?: Json | null
+          ai_score?: number | null
+          ai_suggested_message?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          owner_id?: string | null
+          page?: string | null
+          phone: string
+          referrer?: string | null
+          source?: Database["public"]["Enums"]["lead_source"]
+          status?: Database["public"]["Enums"]["lead_status"]
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          ai_intent?: string | null
+          ai_next_action?: string | null
+          ai_objectives?: Json | null
+          ai_score?: number | null
+          ai_suggested_message?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          owner_id?: string | null
+          page?: string | null
+          phone?: string
+          referrer?: string | null
+          source?: Database["public"]["Enums"]["lead_source"]
+          status?: Database["public"]["Enums"]["lead_status"]
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
+      page_views: {
+        Row: {
+          country: string | null
+          created_at: string
+          id: string
+          path: string
+          referrer: string | null
+          session_hash: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          id?: string
+          path: string
+          referrer?: string | null
+          session_hash?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          id?: string
+          path?: string
+          referrer?: string | null
+          session_hash?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Relationships: []
       }
@@ -312,6 +503,21 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "editor"
+      ig_pillar: "educacional" | "case" | "prova_social" | "cta" | "bastidores"
+      ig_post_status: "idea" | "scheduled" | "published" | "failed"
+      lead_source:
+        | "section_inline"
+        | "modal_exit"
+        | "whatsapp_form"
+        | "blog"
+        | "outro"
+      lead_status:
+        | "novo"
+        | "contato"
+        | "qualificado"
+        | "proposta"
+        | "fechado"
+        | "perdido"
       post_status: "draft" | "published" | "archived"
     }
     CompositeTypes: {
@@ -441,6 +647,23 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "editor"],
+      ig_pillar: ["educacional", "case", "prova_social", "cta", "bastidores"],
+      ig_post_status: ["idea", "scheduled", "published", "failed"],
+      lead_source: [
+        "section_inline",
+        "modal_exit",
+        "whatsapp_form",
+        "blog",
+        "outro",
+      ],
+      lead_status: [
+        "novo",
+        "contato",
+        "qualificado",
+        "proposta",
+        "fechado",
+        "perdido",
+      ],
       post_status: ["draft", "published", "archived"],
     },
   },
