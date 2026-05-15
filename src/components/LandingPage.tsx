@@ -245,6 +245,9 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* FUNIL DE LEADS */}
+      <LeadFunnelSection />
+
       {/* PRODUTO */}
       <section id="produto" className="py-20 md:py-32">
         <div className="section-padding max-w-[1400px] mx-auto">
