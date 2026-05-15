@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { LayoutDashboard, FileText, FolderTree, Tags as TagsIcon, ImageIcon, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, FolderTree, Tags as TagsIcon, ImageIcon, Settings, LogOut, BarChart3, Users, Instagram } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,6 +19,9 @@ import logo from "@/assets/logo.jpg";
 
 const items = [
   { title: "Dashboard", url: "/admin/dashboard", icon: LayoutDashboard },
+  { title: "Analítico", url: "/admin/analitico", icon: BarChart3 },
+  { title: "CRM", url: "/admin/crm", icon: Users },
+  { title: "Instagram", url: "/admin/instagram", icon: Instagram },
   { title: "Posts", url: "/admin/posts", icon: FileText },
   { title: "Categorias", url: "/admin/categorias", icon: FolderTree },
   { title: "Tags", url: "/admin/tags", icon: TagsIcon },

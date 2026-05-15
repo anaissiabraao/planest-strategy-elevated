@@ -28,6 +28,9 @@ const Categories = lazy(() => import("./pages/admin/Categories.tsx"));
 const Tags = lazy(() => import("./pages/admin/Tags.tsx"));
 const Media = lazy(() => import("./pages/admin/Media.tsx"));
 const Settings = lazy(() => import("./pages/admin/Settings.tsx"));
+const Analytics = lazy(() => import("./pages/admin/Analytics.tsx"));
+const CRM = lazy(() => import("./pages/admin/CRM.tsx"));
+const Instagram = lazy(() => import("./pages/admin/Instagram.tsx"));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -65,6 +68,9 @@ const App = () => (
                   <Route path="tags" element={<Tags />} />
                   <Route path="midia" element={<Media />} />
                   <Route path="configuracoes" element={<Settings />} />
+                  <Route path="analitico" element={<Analytics />} />
+                  <Route path="crm" element={<CRM />} />
+                  <Route path="instagram" element={<Instagram />} />
                 </Route>
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
