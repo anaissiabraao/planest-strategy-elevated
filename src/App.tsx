@@ -15,6 +15,8 @@ import NotFound from "./pages/NotFound.tsx";
 import OpenSaasRedirect from "./pages/OpenSaasRedirect.tsx";
 import AIChatWidget from "./components/AIChatWidget.tsx";
 import CookieConsent from "./components/CookieConsent.tsx";
+import ExitIntentModal from "./components/landing/ExitIntentModal.tsx";
+import { usePageTracking } from "./hooks/usePageTracking.ts";
 
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
@@ -40,6 +42,8 @@ const PageLoader = () => (
 
 const queryClient = new QueryClient();
 
+function RouteTracker() { usePageTracking(); return null; }
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
@@ -48,6 +52,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
+            <RouteTracker />
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -78,6 +83,7 @@ const App = () => (
             </Suspense>
             <AIChatWidget />
             <CookieConsent />
+            <ExitIntentModal />
           </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
