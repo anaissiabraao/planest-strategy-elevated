@@ -1,10 +1,28 @@
 import { Outlet, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function AdminLayout() {
+  useEffect(() => {
+    // Prefetch admin route chunks so navigation feels instant
+    const prefetch = () => {
+      import("./Dashboard");
+      import("./PostsList");
+      import("./PostEditor");
+      import("./Categories");
+      import("./Tags");
+      import("./Media");
+      import("./Settings");
+      import("./Analytics");
+      import("./CRM");
+      import("./Instagram");
+    };
+    const idle = (window as any).requestIdleCallback || ((cb: any) => setTimeout(cb, 200));
+    idle(prefetch);
+  }, []);
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-muted/30">
