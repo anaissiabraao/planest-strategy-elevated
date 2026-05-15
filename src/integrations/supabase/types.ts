@@ -511,6 +511,7 @@ export type Database = {
         | "whatsapp_form"
         | "blog"
         | "outro"
+        | "manual"
       lead_status:
         | "novo"
         | "contato"
@@ -655,6 +656,7 @@ export const Constants = {
         "whatsapp_form",
         "blog",
         "outro",
+        "manual",
       ],
       lead_status: [
         "novo",

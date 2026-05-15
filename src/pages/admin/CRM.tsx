@@ -4,10 +4,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { DndContext, DragEndEvent, DragOverlay, PointerSensor, useDraggable, useDroppable, useSensor, useSensors } from "@dnd-kit/core";
-import { Loader2, Sparkles, Phone, Mail, MessageSquare } from "lucide-react";
+import { Loader2, Sparkles, Phone, Mail, MessageSquare, Plus } from "lucide-react";
 import { format } from "date-fns";
 
 type LeadStatus = "novo" | "contato" | "qualificado" | "proposta" | "fechado" | "perdido";
@@ -72,6 +76,9 @@ export default function CRM() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNote, setNewNote] = useState("");
   const [aiBusy, setAiBusy] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", status: "novo" as LeadStatus, notes: "" });
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
 
   async function load() {
@@ -146,12 +153,83 @@ export default function CRM() {
 
   if (loading) return <div className="flex justify-center py-20"><Loader2 className="animate-spin" /></div>;
 
+  async function createLead() {
+    if (!form.name.trim() || !form.phone.trim()) {
+      toast.error("Nome e telefone são obrigatórios");
+      return;
+    }
+    setCreating(true);
+    const { data: u } = await supabase.auth.getUser();
+    const { data, error } = await supabase.from("leads").insert({
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim() || null,
+      status: form.status,
+      source: "manual" as any,
+      owner_id: u.user?.id ?? null,
+    }).select().single();
+    if (error) {
+      setCreating(false);
+      return toast.error("Falha ao criar lead: " + error.message);
+    }
+    if (form.notes.trim() && data) {
+      await supabase.from("lead_notes").insert({ lead_id: data.id, body: form.notes.trim(), author_id: u.user?.id, kind: "note" });
+    }
+    toast.success("Lead criado");
+    setCreating(false);
+    setCreateOpen(false);
+    setForm({ name: "", phone: "", email: "", status: "novo", notes: "" });
+    load();
+  }
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-heading font-bold">CRM</h1>
-        <p className="text-sm text-muted-foreground">{leads.length} leads · Arraste para mover entre estágios</p>
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <h1 className="text-2xl font-heading font-bold">CRM</h1>
+          <p className="text-sm text-muted-foreground">{leads.length} leads · Arraste para mover entre estágios</p>
+        </div>
+        <Button onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4" /> Novo lead</Button>
       </div>
+
+      <Dialog open={createOpen} onOpenChange={setCreateOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Adicionar lead manualmente</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div>
+              <Label>Nome *</Label>
+              <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Nome completo" />
+            </div>
+            <div>
+              <Label>Telefone *</Label>
+              <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="(11) 99999-9999" />
+            </div>
+            <div>
+              <Label>E-mail</Label>
+              <Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="opcional" />
+            </div>
+            <div>
+              <Label>Estágio</Label>
+              <Select value={form.status} onValueChange={(v) => setForm({ ...form, status: v as LeadStatus })}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  {COLUMNS.map(c => <SelectItem key={c.id} value={c.id}>{c.label}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Nota inicial</Label>
+              <Textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="Contexto, origem, conversa..." />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setCreateOpen(false)}>Cancelar</Button>
+            <Button onClick={createLead} disabled={creating}>{creating ? "Salvando..." : "Criar lead"}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <DndContext sensors={sensors} onDragEnd={onDragEnd}>
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
